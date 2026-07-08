@@ -292,8 +292,8 @@
   .sxl{position:absolute;top:calc(100% + 24px);left:0;right:0;text-align:center;font-size:11px;color:var(--muted)}
   html.js .fpanel .pt{opacity:0;transition:opacity .4s ease;transition-delay:calc(var(--i)*30ms + .15s)}
   html.js .fpanel.in .pt{opacity:1}
-  .cats{margin-top:16px}
-  .cat{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:12px;padding:8px 0}
+  .cats{margin-top:16px;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:12px;row-gap:17px}
+  .cat{display:contents}
   .cat .cn{font-size:12.5px;line-height:1.2;white-space:nowrap}
   .cat .cn .tag2{font-family:var(--mono);font-size:9px;padding:1px 5px;border-radius:2px;margin-left:7px;vertical-align:1.5px;white-space:nowrap}
   .cat .cn .tag2.pre{color:var(--muted);border:1px solid var(--hair)}
@@ -646,15 +646,15 @@
           <div class="plabel" style="right:calc(100% - 51.43% + 15px);top:29.05%">GPT-5</div>
           <div class="plabel" style="right:calc(100% - 56.9% + 15px);top:33.81%">GPT-5.4</div>
           <div class="plabel" style="right:calc(100% - 70.24% + 15px);top:48.1%">GLM-5</div>
-          <div class="plabel" style="left:calc(60.24% + 15px);top:55.5%">GPT-OSS 120B</div>
+          <div class="plabel" style="right:calc(100% - 60.24% + 12px);top:calc(53.57% + 18px)">GPT-OSS 120B</div>
           <div class="plabel" style="right:calc(100% - 51.67% + 15px);top:45%">GPT-5.2</div>
-          <div class="plabel" style="left:calc(73.33% + 15px);top:75.95%">MiniMax M2.5</div>
+          <div class="plabel" style="right:calc(100% - 73.33% + 12px);top:calc(75.95% + 18px)">MiniMax M2.5</div>
           <div class="plabel" style="right:calc(100% - 70% + 15px);top:71.19%">DeepSeek V3.2</div>
           <div class="plabel" style="right:calc(100% - 52.38% + 15px);top:50.71%">GPT-5.1</div>
           <div class="plabel" style="right:2%;top:calc(91.43% - 19px)">Gemini 3 Flash</div>
           <div class="plabel" style="right:calc(100% - 80.95% + 15px);top:95.5%">DeepSeek V4 Pro</div>
-          <div class="plabel" style="left:calc(25.95% + 15px);top:71.43%">Kimi K2.5</div>
-          <div class="plabel" style="left:69.29%;top:calc(90% - 19px);transform:translate(-50%,-50%)">GPT-4o</div>
+          <div class="plabel" style="right:calc(100% - 25.95% + 15px);top:71.43%">Kimi K2.5</div>
+          <div class="plabel" style="right:calc(100% - 69.29% + 15px);top:90%">GPT-4o</div>
           <img class="pt h-google" style="left:89.29%;top:39.52%;--i:0" src="assets/logos/google.png" alt="" data-tip="Gemini 3.1 Pro · act 90.5, abstain 65.4">
           <img class="pt h-claude" style="left:55.95%;top:7.14%;--i:1" src="assets/logos/anthropic.png" alt="" data-tip="Claude Opus 4.7 · act 76.5, abstain 79.0. The only model above the line.">
           <img class="pt h-claude" style="left:71.67%;top:37.14%;--i:2" src="assets/logos/anthropic.png" alt="" data-tip="Claude Sonnet 4.6 · act 83.1, abstain 66.4">
