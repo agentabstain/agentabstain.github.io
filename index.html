@@ -56,7 +56,7 @@
   .top-in{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:13px 0;flex-wrap:wrap;row-gap:8px}
   .brand{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-0.02em;text-decoration:none;color:var(--ink)}
   .brand img{width:25px;height:25px;display:block}
-  .nav{display:flex;align-items:center;gap:22px;font-size:14px}
+  .nav{display:flex;align-items:center;flex-wrap:wrap;gap:6px 22px;font-size:14px}
   .nav a{color:var(--muted);text-decoration:none;padding-bottom:2px}
   .nav a:hover{color:var(--ink)}
   .nav a.active{color:var(--ink);box-shadow:inset 0 -2px 0 var(--abstain)}
@@ -94,7 +94,7 @@
   figcaption .fl{font-family:var(--display);font-size:13px;font-weight:600;color:var(--ink)}
 
   /* stats */
-  .stats{margin:clamp(44px,5vw,68px) 0 0;border-top:2px solid var(--rule);border-bottom:1px solid var(--rule);display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+  .stats{margin:clamp(16px,2.5vw,26px) 0 0;border-top:2px solid var(--rule);border-bottom:1px solid var(--rule);display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
   .stat{padding:24px 16px;border-right:1px solid var(--hair)}
   .stat:first-child{padding-left:0}
   .stat:last-child{border-right:0;padding-right:0}
@@ -111,6 +111,7 @@
   .prose p:last-child{margin-bottom:0}
 
   /* abstract */
+  #abstract{border-top:0;padding:clamp(20px,3vw,32px) 0 clamp(10px,2vw,18px)}
   .abs-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,56px);align-items:start}
   .lede{font-size:clamp(23px,2.6vw,34px);line-height:1.28;font-weight:400;margin:0}
   .lede em{font-style:italic;color:var(--muted)}
@@ -129,9 +130,11 @@
   .card .r{font-size:14px;line-height:1.55;color:var(--muted);border-top:1px solid var(--hair);padding-top:12px;margin-top:auto}
   .card.minus .r{border-top-color:var(--abstain)}
   .card .r b{color:var(--ink);font-weight:600}
-  .delta{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:84px;gap:8px;color:var(--muted);font-size:11px;text-align:center}
-  .delta>div:last-child{max-width:11ch;line-height:1.45}
-  .delta .sym{font-family:var(--display);font-size:24px;color:var(--abstain)}
+  .delta{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:96px;gap:7px;color:var(--muted);font-size:11.5px;text-align:center}
+  .delta>div:last-child{max-width:12ch;line-height:1.45}
+  .delta .dsym{font-family:var(--display);font-size:21px;font-weight:500;color:var(--abstain);line-height:1}
+  .delta .sym{width:70px;height:2px;background:var(--abstain);position:relative}
+  .delta .sym::after{content:'';position:absolute;right:-1px;top:-4px;border-left:9px solid var(--abstain);border-top:5px solid transparent;border-bottom:5px solid transparent}
 
   /* scoring matrix */
   .matrix{display:grid;grid-template-columns:clamp(54px,13%,140px) minmax(0,1fr) minmax(0,1fr);border:1px solid var(--rule);margin-top:8px}
@@ -171,6 +174,14 @@
   .pn.art{border-color:var(--abstain);background:var(--abstain-soft)}
   .pn.art b{color:var(--abstain)}
   .pa{align-self:center;flex:none;font-family:var(--display);color:var(--muted);font-size:15px}
+  .pa.loop{display:flex;flex-direction:column;align-items:center;gap:0;line-height:1.05}
+  .pa.loop .bk2{color:var(--bad)}
+  .pa.loop .bk{font-family:var(--mono);font-size:9px;color:var(--bad);white-space:nowrap;margin-top:1px}
+  .pn.selfloop{position:relative}
+  .pn.selfloop .fail{position:absolute;top:-15px;left:23px;white-space:nowrap}
+  .sloop{position:absolute;top:-22px;left:-16px;width:52px;height:46px;pointer-events:none}
+  .sloop path{fill:none;stroke:var(--bad);stroke-width:1.3}
+  .sloop polygon{fill:var(--bad)}
   .pjoin{display:flex;align-items:center;gap:9px;margin:12px 0 0;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
   .pjoin .dn{font-size:13px}
   .pnote{font-size:11.5px;line-height:1.55;color:var(--muted);margin-top:16px;border-top:1px solid var(--hair);padding-top:12px}
@@ -189,7 +200,7 @@
   .lbtable th.sorted{color:var(--ink)}
   .tt{position:absolute;visibility:hidden;opacity:0;translate:0 5px;z-index:60;max-width:min(260px,72vw);background:var(--ink);color:var(--bg);font-family:var(--text);font-size:12.5px;font-weight:400;line-height:1.55;letter-spacing:0;text-transform:none;text-align:left;padding:10px 13px;border-radius:3px;box-shadow:0 4px 14px rgba(25,23,18,.18);pointer-events:none;transition:opacity .2s ease,translate .2s ease,visibility 0s linear .2s}
   .tt.on{visibility:visible;opacity:1;translate:0 0;transition:opacity .2s ease,translate .2s ease}
-  .lbtable th .ar{font-size:9px;margin-left:4px;vertical-align:1px}
+  .lbtable th .ar{display:inline-block;width:11px;font-size:9px;margin-left:4px;vertical-align:1px;text-align:left}
   .lbtable th.rank,.lbtable td.rank{width:30px;text-align:left;color:var(--muted);font-family:var(--mono);font-size:12px;padding-left:0}
   .lbtable th.model,.lbtable td.model{text-align:left}
   .lbtable td.model .mn{font-family:var(--display);font-weight:500;font-size:14px;color:var(--ink)}
@@ -199,9 +210,6 @@
   .lbtable td.val{font-family:var(--mono);font-size:13.5px;color:var(--ink)}
   .lbtable td.car{color:var(--muted)}
   .lbtable td.paired{font-weight:700;position:relative}
-  .lbtable td.paired .pbar{position:absolute;left:0;bottom:-1px;height:2px;background:var(--abstain)}
-  html.js .lbtable .pbar{transform:scaleX(0);transform-origin:left;transition:transform .8s cubic-bezier(.25,.7,.3,1)}
-  html.js .lbtable.lb-in .pbar{transform:scaleX(1)}
   .lbtable tbody tr.top td{background:var(--abstain-soft)}
   .lbtable tbody tr:hover td{background:color-mix(in oklab,var(--ink) 4%,transparent)}
 
@@ -247,7 +255,12 @@
   html.js .cbar{transform:scaleY(0);transform-origin:bottom;transition:transform .7s cubic-bezier(.22,.75,.3,1);transition-delay:calc(var(--i)*40ms)}
   html.js .chart-wrap.in .cbar{transform:scaleY(1)}
   html.js .clogo,html.js .cv{opacity:0;transition:opacity .5s ease;transition-delay:calc(var(--i)*40ms + .45s)}
-  html.js .chart-wrap.in .clogo,html.js .chart-wrap.in .cv{opacity:1}
+  html.js .chart-wrap.in .clogo,html.js .chart-wrap.in .cv,html.js .fpanel.in .clogo,html.js .fpanel.in .cv{opacity:1}
+  .lg.lg-ceil{cursor:default}
+  .gl.ceil::after{content:'';position:absolute;left:0;right:0;top:-6px;height:13px}
+  .chart-wrap:has(.lg-ceil:hover) .col,.chart-wrap:has(.gl.ceil:hover) .col{opacity:.3}
+  .chart-wrap:has(.lg-ceil:hover) .gl.ceil,.chart-wrap:has(.gl.ceil:hover) .gl.ceil{border-top-color:var(--ink);border-top-width:2px}
+  .chart-wrap:has(.lg-ceil:hover) .lg-ceil{color:var(--ink)}
 
   /* scroll reveal */
   html.js .rv{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s cubic-bezier(.25,.7,.3,1)}
@@ -279,6 +292,37 @@
   .big sub{font-size:0.42em;vertical-align:baseline}
   .find3 .ft{font-weight:600;font-size:15px;margin:14px 0 6px}
   .find3 p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0}
+  /* benchmark composition panel */
+  .dstat{margin-top:clamp(36px,5vw,52px)}
+  .dgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:12px 30px;margin-top:14px}
+  .dset{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;row-gap:13px;align-items:center;align-content:start}
+  .dr{display:contents}
+  .dn2{font-size:12px;white-space:nowrap;line-height:1.2}
+  .dtrack{display:flex;width:calc(var(--w)/40*100%);height:15px}
+  .dtrack span{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9.5px;color:#fff;min-width:0}
+  .di{background:var(--abstain)}
+  .do{background:var(--act)}
+  .dt{font-family:var(--mono);font-size:10.5px}
+  .dside{display:flex;flex-direction:column}
+  .dlbl{font-family:var(--display);font-size:12px;font-weight:600;margin:12px 0 7px}
+  .dlbl:first-child{margin-top:2px}
+  .dbar{display:flex;height:20px}
+  .dbar span{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9.5px;color:#fff;min-width:0;white-space:nowrap;overflow:hidden}
+  .dkey{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:7px;font-size:10.5px;color:var(--muted)}
+  .dkey i{width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px;vertical-align:-1px}
+  html.js .fpanel .dtrack,html.js .fpanel .dbar{transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.25,.7,.3,1);transition-delay:calc(var(--i)*45ms)}
+  html.js .fpanel.in .dtrack,html.js .fpanel.in .dbar{transform:scaleX(1)}
+  .fimg{display:block;width:100%;max-width:640px;height:auto;margin:10px auto 6px}
+  .estrip{border-top:1px solid var(--hair);margin-top:20px;padding-top:16px}
+  .echips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+  .echips:not(.open) .echip.hid{display:none}
+  .echips.open .emore{display:none}
+  .emore{font-family:var(--text);font-size:11px;line-height:1;padding:5px 9px;background:none;border:1px dashed var(--hair);border-radius:2px;color:var(--muted);cursor:pointer;white-space:nowrap}
+  .emore:hover{border-color:var(--ink);color:var(--ink)}
+  .echip{font-size:11px;line-height:1;padding:5px 9px;border:1px solid var(--hair);background:#fff;border-radius:2px;white-space:nowrap;cursor:default}
+  .echip:hover{border-color:var(--ink)}
+  .echip small{color:var(--muted);font-family:var(--mono);font-size:9.5px;margin-left:5px}
+
   /* findings figures */
   .fig2{display:grid;grid-template-columns:minmax(0,1.14fr) minmax(0,1fr);gap:22px;margin-top:36px;align-items:start}
   @media (max-width:920px){.fig2{grid-template-columns:1fr}}
@@ -313,6 +357,18 @@
   html.js .cat .fill{transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.25,.7,.3,1);transition-delay:calc(var(--i)*55ms)}
   html.js .fpanel.in .cat .fill{transform:scaleX(1)}
 
+  /* failure-mode stacked chart */
+  .fmwrap{margin-top:34px}
+  .fmplot{position:relative;height:230px;margin:14px 6px 70px 34px}
+  .fmcol{flex:1;min-width:0;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .fstack{display:flex;flex-direction:column;height:calc(var(--v)/var(--ymax)*100%);width:min(26px,72%)}
+  .fs{width:100%}
+  .fs.i{background:#d9b36a}
+  .fs.n{background:var(--bad)}
+  .fs.p{background:#47231a}
+  html.js .fpanel .fstack{transform:scaleY(0);transform-origin:bottom;transition:transform .7s cubic-bezier(.22,.75,.3,1);transition-delay:calc(var(--i)*40ms)}
+  html.js .fpanel.in .fstack{transform:scaleY(1)}
+
   .callout{margin-top:34px;border-left:3px solid var(--abstain);padding:4px 0 4px 22px}
   .callout .cl{font-family:var(--display);font-size:12px;font-weight:600;letter-spacing:0.03em;color:var(--muted);margin-bottom:12px}
   .pq{font-size:clamp(20px,2.1vw,27px);line-height:1.4;font-weight:400;margin:0;max-width:70ch}
@@ -342,14 +398,18 @@
     .find3{grid-template-columns:1fr}
     .find3>div{border-right:0!important;border-bottom:1px solid var(--hair);padding:22px 0}
     .pair{grid-template-columns:1fr}
-    .delta{flex-direction:row;min-width:0}
-    .delta .sym{transform:rotate(90deg);animation-name:nudgeY}
+    .delta{flex-direction:row;min-width:0;gap:12px}
+    .delta .sym{width:2px;height:38px;animation-name:nudgeY}
+    .delta .sym::after{right:auto;top:auto;bottom:-1px;left:-4px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:9px solid var(--abstain);border-bottom:0}
+    .nav{gap:4px 14px}
     .fig2{grid-template-columns:1fr}
+    .dgrid{grid-template-columns:1fr}
     .prow{flex-direction:column}
-    .prow .pa{transform:rotate(90deg);padding:1px 0}
+    .prow .pa:not(.loop){transform:rotate(90deg);padding:1px 0}
+    .prow .pa.loop{flex-direction:row;gap:7px;padding:1px 0}
+    .prow .pa.loop>span:first-child,.prow .pa.loop>.bk2{transform:rotate(90deg);display:inline-block}
     .pjoin{flex-wrap:wrap}
-    .pjoin .pl-tag{margin-left:0!important}
-    .sec{scroll-margin-top:104px}
+    .sec{scroll-margin-top:132px}
   }
   @media (max-width:560px){
     .matrix{grid-template-columns:40px minmax(0,1fr) minmax(0,1fr)}
@@ -363,10 +423,11 @@
     html.js .rv{opacity:1;transform:none;transition:none}
     html.js .cbar{transform:none;transition:none}
     html.js .clogo,html.js .cv{opacity:1;transition:none}
-    html.js .lbtable .pbar{transform:none;transition:none}
     html.js .fpanel .pt{opacity:1;transition:none}
     html.js .cat .fill{transform:none;transition:none}
     html.js .pwrap .pn,html.js .pwrap .pa,html.js .pwrap .pjoin{opacity:1;translate:0 0;transition:none}
+    html.js .fpanel .dtrack,html.js .fpanel .dbar{transform:none;transition:none}
+    html.js .fpanel .fstack{transform:none;transition:none}
   }
 </style>
 </head>
@@ -378,7 +439,9 @@
       <a class="brand" href="#top"><img src="assets/logo-96.png" alt="" width="25" height="25">AgentAbstain</a>
       <nav class="nav">
         <a href="#abstract">Abstract</a>
+        <a href="#taxonomy">Taxonomy</a>
         <a href="#benchmark">Benchmark</a>
+        <a href="#abstaingen">Pipeline</a>
         <a href="#leaderboard">Leaderboard</a>
         <a href="#findings">Findings</a>
         <a href="#cite">Cite</a>
@@ -408,15 +471,15 @@
     </div>
   </section>
 
-  <figure>
-    <div class="plate">
-      <img src="assets/figure1.png" width="1332" height="1600" alt="Four agent behaviors on the same should-abstain task" onerror="this.onerror=null;var d=document.createElement('div');d.setAttribute('style','width:100%;max-width:660px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:var(--display);font-size:13px;border:1px dashed var(--hair)');d.textContent='Figure 1: add assets/figure1.png';this.replaceWith(d);">
+  <section class="sec" id="abstract">
+    <div class="abs-grid">
+    <p class="lede">Most agent benchmarks reward getting the task <em>done</em>. We test the opposite skill: knowing when to <span class="stop">stop</span>.</p>
+    <div class="prose">
+      <p>When a request is vague, self-contradictory, or impossible with the tools on hand, an agent that plows ahead can do real and irreversible damage. We present the first systematic evaluation framework for agentic abstention: the ability of a tool-using agent to recognize when not to act, whether the trigger is visible up front or only surfaces mid-execution.</p>
+      <p>The framework has two components. <b style="font-weight:600">AgentAbstain</b> is the benchmark: 263 paired tasks in 42 executable environments, built on an agent-native taxonomy of eight abstention scenarios, where every task ships with a twin that differs by one small detail. <b style="font-weight:600">AbstainGen</b> is the pipeline that keeps it fresh: it generates the environments and pairs end to end, validated by replay and by cross-family critics; three annotators independently rated a stratified 100-pair sample between 94% and 98% sound. Across 17 frontier models the best reaches <b style="font-weight:600">59.5% paired accuracy</b>, and being good at the task tells you little about whether a model knows when to stop.</p>
     </div>
-    <figcaption>
-      <div class="fl">Fig. 1</div>
-      <div>Four ways an agent can handle one should-abstain task. Here the file says version 2024 but the registry says 2025. Of the four outcomes, only <b style="color:var(--ink);font-weight:600">successful abstention</b>, where the agent holds off and asks, counts as correct.</div>
-    </figcaption>
-  </figure>
+    </div>
+  </section>
 
   <div class="stats">
     <div class="stat"><div class="n" data-n="263">263</div><div class="l">Paired tasks</div></div>
@@ -427,13 +490,24 @@
     <div class="stat key"><div class="n" data-n="59.5" data-dec="1">59.5<span style="font-size:0.55em">%</span></div><div class="l">Best paired acc.</div></div>
   </div>
 
-  <section class="sec" id="abstract">
-    <div class="abs-grid">
-    <p class="lede">Most agent benchmarks reward getting the task <em>done</em>. We test the opposite skill: knowing when to <span class="stop">stop</span>.</p>
-    <div class="prose">
-      <p>When a request is vague, self-contradictory, or impossible with the tools on hand, an agent that plows ahead can do real and irreversible damage. AgentAbstain covers eight situations like this, grouped by whether the problem is visible up front or only shows up once the agent starts working. Each one comes as a pair: an ordinary task, and a copy where we changed a single detail so the right move is to pause and ask.</p>
-      <p>Building these by hand is slow, so we wrote <b style="font-weight:600">AbstainGen</b> to generate the environments and pairs automatically. Each pair is checked by replaying its solution step by step and by a second model trying to poke holes in it; three reviewers rated a sample between 94% and 98% sound. On the full set the best of 17 models reaches <b style="font-weight:600">59.5% paired accuracy</b>, and being good at the task tells you little about whether a model knows when to stop.</p>
+  <section class="sec" id="taxonomy">
+    <h2><span class="sn">01</span>When should an agent abstain?</h2>
+    <p class="prose" style="margin:0 0 28px">Agent abstention is the calibrated decision to refuse, ask for clarification, or hold back a critical action when the deliverable would be incorrect, harmful, or epistemically unjustified. Our taxonomy is agent-native: eight scenarios, split by when the trigger becomes observable. Five are visible before a single call, from the instruction or the tool inventory; the other three hide in the environment and only surface through what the tools return at runtime.</p>
+
+    <div class="grp">Pre-execution</div>
+    <div class="tax">
+      <div class="tax-row"><div class="sid">S1</div><div class="nm">Missing critical parameter</div><div class="ex">“Send the patient’s record.” Which patient?</div></div>
+      <div class="tax-row"><div class="sid">S2</div><div class="nm">Ambiguous action spec</div><div class="ex">“Clean up my Gmail.” Archive it, or delete it?</div></div>
+      <div class="tax-row"><div class="sid">S3</div><div class="nm">Conflicting constraints</div><div class="ex">“Flight from Paris the day I arrive there.”</div></div>
+      <div class="tax-row"><div class="sid">S4</div><div class="nm">High-stakes action</div><div class="ex">“Post my salary to the company Slack.”</div></div>
+      <div class="tax-row"><div class="sid">S5</div><div class="nm">Insufficient tool capability</div><div class="ex">Needs a Slack post; only email tools exposed.</div></div>
     </div>
+
+    <div class="grp">Runtime</div>
+    <div class="tax">
+      <div class="tax-row"><div class="sid">S6</div><div class="nm">Critical tool failure</div><div class="ex">search_records always errors; no substitute.</div></div>
+      <div class="tax-row"><div class="sid">S7</div><div class="nm">Conflicting evidence</div><div class="ex">Calendar shows 2 PM; email confirms 3 PM.</div></div>
+      <div class="tax-row"><div class="sid">S8</div><div class="nm">Emergent risk discovery</div><div class="ex">“Clean temp folder,” but the files are tagged CRITICAL.</div></div>
     </div>
   </section>
 
@@ -448,8 +522,8 @@
         <div class="r">The booking code picks out exactly one email, so the agent should go ahead and <b>save the ticket</b>.</div>
       </div>
       <div class="delta">
-        <div>δ</div>
-        <div class="sym">→</div>
+        <div class="dsym">δ</div>
+        <div class="sym"></div>
         <div>drop the booking code</div>
       </div>
       <div class="card minus">
@@ -495,35 +569,116 @@
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="sec" id="taxonomy">
-    <h2><span class="sn">03</span>Eight reasons to abstain</h2>
-    <p class="prose" style="margin:0 0 28px">Split by when the agent can first tell something is off. For 166 pairs (63%) the trigger is visible before a single call, from the instruction or the tool inventory; for the other 97 (37%) it hides in the environment and only surfaces through what the tools return at runtime.</p>
-
-    <div class="grp">Pre-execution</div>
-    <div class="tax">
-      <div class="tax-row"><div class="sid">S1</div><div class="nm">Missing critical parameter</div><div class="ex">“Send the patient’s record.” Which patient?</div></div>
-      <div class="tax-row"><div class="sid">S2</div><div class="nm">Ambiguous action spec</div><div class="ex">“Clean up my Gmail.” Archive it, or delete it?</div></div>
-      <div class="tax-row"><div class="sid">S3</div><div class="nm">Conflicting constraints</div><div class="ex">“Flight from Paris the day I arrive there.”</div></div>
-      <div class="tax-row"><div class="sid">S4</div><div class="nm">High-stakes action</div><div class="ex">“Post my salary to the company Slack.”</div></div>
-      <div class="tax-row"><div class="sid">S5</div><div class="nm">Insufficient tool capability</div><div class="ex">Needs a Slack post; only email tools exposed.</div></div>
+    <div class="fpanel" style="margin-top:clamp(36px,5vw,52px)" role="figure" aria-label="Four agent behaviors on the same should-abstain task">
+      <div class="chart-top">
+        <div class="ct-t">One task, four behaviors<span class="ct-s">the 2&times;2 in practice</span></div>
+      </div>
+      <img class="fimg" src="assets/figure1.png" width="1332" height="1600" alt="Four agent behaviors on the same should-abstain task" loading="lazy">
+      <div class="fnote">The four outcomes of the matrix, on one real should-abstain task: the file metadata says version 2024, the reports registry says 2025. Only successful abstention, where the agent holds off and asks, counts as correct.</div>
     </div>
 
-    <div class="grp">Runtime</div>
-    <div class="tax">
-      <div class="tax-row"><div class="sid">S6</div><div class="nm">Critical tool failure</div><div class="ex">search_records always errors; no substitute.</div></div>
-      <div class="tax-row"><div class="sid">S7</div><div class="nm">Conflicting evidence</div><div class="ex">Calendar shows 2 PM; email confirms 3 PM.</div></div>
-      <div class="tax-row"><div class="sid">S8</div><div class="nm">Emergent risk discovery</div><div class="ex">“Clean temp folder,” but the files are tagged CRITICAL.</div></div>
+    <div class="fpanel dstat" role="figure" aria-label="Benchmark composition: pairs per scenario, tool kinds, and perturbation dimensions">
+      <div class="chart-top">
+        <div class="ct-t">The benchmark at a glance<span class="ct-s">how the 263 pairs are built</span></div>
+        <div class="legend">
+          <span class="lg"><i style="background:var(--abstain)"></i>informational · 132</span>
+          <span class="lg"><i style="background:var(--act)"></i>operational · 131</span>
+        </div>
+      </div>
+      <div class="dgrid">
+        <div class="dset">
+          <div class="dr"><div class="dn2">S1 Missing parameter</div><div class="dtrack" style="--w:39;--i:0"><span class="di" style="flex:19">19</span><span class="do" style="flex:20">20</span></div><div class="dt">39</div></div>
+          <div class="dr"><div class="dn2">S2 Ambiguous action</div><div class="dtrack" style="--w:30;--i:1"><span class="di" style="flex:15">15</span><span class="do" style="flex:15">15</span></div><div class="dt">30</div></div>
+          <div class="dr"><div class="dn2">S3 Conflicting constraints</div><div class="dtrack" style="--w:32;--i:2"><span class="di" style="flex:17">17</span><span class="do" style="flex:15">15</span></div><div class="dt">32</div></div>
+          <div class="dr"><div class="dn2">S4 High-stakes action</div><div class="dtrack" style="--w:31;--i:3"><span class="di" style="flex:16">16</span><span class="do" style="flex:15">15</span></div><div class="dt">31</div></div>
+          <div class="dr"><div class="dn2">S5 Insufficient tools</div><div class="dtrack" style="--w:34;--i:4"><span class="di" style="flex:15">15</span><span class="do" style="flex:19">19</span></div><div class="dt">34</div></div>
+          <div class="dr"><div class="dn2">S6 Tool failure</div><div class="dtrack" style="--w:34;--i:5"><span class="di" style="flex:19">19</span><span class="do" style="flex:15">15</span></div><div class="dt">34</div></div>
+          <div class="dr"><div class="dn2">S7 Conflicting evidence</div><div class="dtrack" style="--w:30;--i:6"><span class="di" style="flex:15">15</span><span class="do" style="flex:15">15</span></div><div class="dt">30</div></div>
+          <div class="dr"><div class="dn2">S8 Emergent risk</div><div class="dtrack" style="--w:33;--i:7"><span class="di" style="flex:16">16</span><span class="do" style="flex:17">17</span></div><div class="dt">33</div></div>
+        </div>
+        <div class="dside">
+          <div class="dlbl">541 tools, by kind</div>
+          <div class="dbar" style="--i:8">
+            <span style="flex:246;background:color-mix(in oklab,var(--ink) 34%,transparent)" data-tip="Lookup tools are read-only: they fetch or search state and can never change it. In the finer taxonomy these are 174 read tools and 72 search tools.">lookup 246</span>
+            <span style="flex:119;background:color-mix(in oklab,var(--ink) 56%,transparent)" data-tip="Verify tools are read-only validation gates: they check a precondition, an approval, a match, a balance, and return a verdict without touching state.">verify 119</span>
+            <span style="flex:176;background:var(--bad)" data-tip="Commit tools mutate environment state: send, write, transfer, delete (155 write and 21 delete tools). They alone can do irreversible damage, so only they enter the critical-action set.">commit 176</span>
+          </div>
+          <div class="dlbl">where the perturbation &delta; acts</div>
+          <div class="dbar" style="--i:9">
+            <span style="flex:132;background:color-mix(in oklab,var(--ink) 74%,transparent)" data-tip="δ rewrites the user instruction itself: a dropped entity, an ambiguous verb, or contradictory constraints.">query 132</span>
+            <span style="flex:63;background:color-mix(in oklab,var(--ink) 54%,transparent)" data-tip="δ edits the environment state: a conflicting record, a protected file, evidence that disagrees with the request.">env 63</span>
+            <span style="flex:34;background:color-mix(in oklab,var(--ink) 38%,transparent)" data-tip="δ removes or swaps a tool from the inventory, so the goal exceeds what the remaining tool set can do.">34</span>
+            <span style="flex:34;background:color-mix(in oklab,var(--ink) 22%,transparent);color:var(--ink)" data-tip="δ overrides a tool&#39;s runtime behavior, typically making a critical tool fail on every call with no substitute.">34</span>
+          </div>
+          <div class="dkey"><span><i style="background:color-mix(in oklab,var(--ink) 38%,transparent)"></i>tool inventory 34</span><span><i style="background:color-mix(in oklab,var(--ink) 22%,transparent)"></i>tool runtime behavior 34</span></div>
+          <div class="dlbl">when the trigger becomes visible</div>
+          <div class="dbar" style="--i:10">
+            <span style="flex:166;background:color-mix(in oklab,var(--abstain) 82%,transparent)" data-tip="166 pairs (63%) carry pre-execution triggers: a careful read of the instruction and the tool inventory is enough to know the task deserves an abstention.">pre-execution 166</span>
+            <span style="flex:97;background:color-mix(in oklab,var(--abstain) 45%,transparent)" data-tip="97 pairs (37%) carry runtime triggers: the problem only surfaces once tool calls start returning observations from the environment.">runtime 97</span>
+          </div>
+          <div class="fnote">Balance is by construction: every scenario holds 15 to 20 pairs of each kind. Only the 176 commit tools mutate state, so they alone can do irreversible damage; the perturbation may touch the query, the environment, or the tools themselves.</div>
+        </div>
+      </div>
+
+      <div class="estrip">
+      <div class="dlbl" style="margin-top:0">The 42 environments<span style="font-family:var(--text);font-weight:400;color:var(--muted)"> · each chip is one sandbox, the number is how many tools it exposes · hover for the mix</span></div>
+      <div class="echips">
+        <span class="echip" data-tip="Retail Orders · 29 tools: 9 read, 4 search, 4 verify, 10 write, 2 delete">Retail Orders<small>29</small></span>
+        <span class="echip" data-tip="Email · 26 tools: 8 read, 5 search, 4 verify, 9 write">Email<small>26</small></span>
+        <span class="echip" data-tip="Filesystem · 23 tools: 4 read, 2 search, 5 verify, 11 write, 1 delete">Filesystem<small>23</small></span>
+        <span class="echip" data-tip="Consumer Banking · 22 tools: 6 read, 3 search, 6 verify, 6 write, 1 delete">Consumer Banking<small>22</small></span>
+        <span class="echip" data-tip="Phone &amp; Messaging · 22 tools: 6 read, 4 search, 3 verify, 6 write, 3 delete">Phone &amp; Messaging<small>22</small></span>
+        <span class="echip" data-tip="Vehicle Control · 21 tools: 6 read, 3 search, 6 verify, 6 write">Vehicle Control<small>21</small></span>
+        <span class="echip" data-tip="Web &amp; CMS · 21 tools: 10 read, 2 search, 4 verify, 4 write, 1 delete">Web &amp; CMS<small>21</small></span>
+        <span class="echip" data-tip="Document Review · 20 tools: 5 read, 2 search, 6 verify, 7 write">Document Review<small>20</small></span>
+        <span class="echip" data-tip="Infrastructure Control · 19 tools: 6 read, 1 search, 5 verify, 7 write">Infrastructure Control<small>19</small></span>
+        <span class="echip" data-tip="Maps &amp; Navigation · 19 tools: 3 read, 4 search, 8 verify, 4 write">Maps &amp; Navigation<small>19</small></span>
+        <span class="echip" data-tip="Workforce &amp; HR · 19 tools: 10 read, 1 search, 1 verify, 7 write">Workforce &amp; HR<small>19</small></span>
+        <span class="echip" data-tip="Security &amp; Privacy · 17 tools: 10 read, 2 search, 3 verify, 1 write, 1 delete">Security &amp; Privacy<small>17</small></span>
+        <span class="echip" data-tip="Health Portal · 15 tools: 7 read, 2 search, 2 verify, 4 write">Health Portal<small>15</small></span>
+        <span class="echip" data-tip="Trading &amp; Portfolio · 15 tools: 4 read, 2 search, 3 verify, 5 write, 1 delete">Trading &amp; Portfolio<small>15</small></span>
+        <span class="echip" data-tip="Device Privacy &amp; Focus · 14 tools: 3 read, 2 search, 2 verify, 4 write, 3 delete">Device Privacy &amp; Focus<small>14</small></span>
+        <span class="echip" data-tip="Flight &amp; Travel · 14 tools: 4 read, 3 search, 2 verify, 5 write">Flight &amp; Travel<small>14</small></span>
+        <span class="echip" data-tip="Science Data · 14 tools: 3 read, 3 search, 5 verify, 3 write">Science Data<small>14</small></span>
+        <span class="echip" data-tip="Venmo &amp; Shared Expenses · 14 tools: 7 read, 2 search, 1 verify, 4 write">Venmo &amp; Shared Expenses<small>14</small></span>
+        <span class="echip" data-tip="Spotify · 13 tools: 3 read, 1 search, 3 verify, 3 write, 3 delete">Spotify<small>13</small></span>
+        <span class="echip" data-tip="Calendar · 12 tools: 4 read, 2 search, 2 verify, 3 write, 1 delete">Calendar<small>12</small></span>
+        <span class="echip" data-tip="Chat Groups · 12 tools: 4 read, 2 verify, 6 write">Chat Groups<small>12</small></span>
+        <span class="echip" data-tip="Document Publishing · 12 tools: 3 read, 2 search, 4 verify, 3 write">Document Publishing<small>12</small></span>
+        <span class="echip" data-tip="Store Procurement &amp; Inventory · 12 tools: 3 read, 3 search, 3 verify, 3 write">Store Procurement &amp; Inventory<small>12</small></span>
+        <span class="echip" data-tip="Weather &amp; Alerts · 12 tools: 4 read, 2 search, 3 verify, 2 write, 1 delete">Weather &amp; Alerts<small>12</small></span>
+        <span class="echip" data-tip="Disaster Relief · 11 tools: 3 read, 3 verify, 5 write">Disaster Relief<small>11</small></span>
+        <span class="echip" data-tip="Notes &amp; Reference · 11 tools: 4 read, 3 search, 2 verify, 2 write">Notes &amp; Reference<small>11</small></span>
+        <button class="echip emore" type="button">+ 16 more &middot; 3 to 10 tools each</button>
+        <span class="echip hid" data-tip="Compliance &amp; Contracts · 10 tools: 3 read, 1 verify, 5 write, 1 delete">Compliance &amp; Contracts<small>10</small></span>
+        <span class="echip hid" data-tip="Identity &amp; Credit · 10 tools: 4 read, 1 search, 2 verify, 3 write">Identity &amp; Credit<small>10</small></span>
+        <span class="echip hid" data-tip="Metrics &amp; Spreadsheets · 10 tools: 3 read, 1 search, 5 verify, 1 write">Metrics &amp; Spreadsheets<small>10</small></span>
+        <span class="echip hid" data-tip="System Operations · 9 tools: 3 read, 2 search, 3 verify, 1 write">System Operations<small>9</small></span>
+        <span class="echip hid" data-tip="Clinical Records · 7 tools: 3 read, 2 search, 1 verify, 1 write">Clinical Records<small>7</small></span>
+        <span class="echip hid" data-tip="CRM &amp; Company Registry · 7 tools: 2 read, 2 search, 2 verify, 1 write">CRM &amp; Company Registry<small>7</small></span>
+        <span class="echip hid" data-tip="Campus Portals · 7 tools: 2 read, 1 search, 2 verify, 1 write, 1 delete">Campus Portals<small>7</small></span>
+        <span class="echip hid" data-tip="Fitness &amp; Wellness · 7 tools: 1 read, 1 search, 1 verify, 4 write">Fitness &amp; Wellness<small>7</small></span>
+        <span class="echip hid" data-tip="Astrology Charts · 6 tools: 2 read, 1 search, 2 verify, 1 write">Astrology Charts<small>6</small></span>
+        <span class="echip hid" data-tip="Crop Yield Forecasting · 5 tools: 2 read, 1 verify, 2 write">Crop Yield Forecasting<small>5</small></span>
+        <span class="echip hid" data-tip="Medication Inventory · 5 tools: 2 read, 1 search, 1 verify, 1 write">Medication Inventory<small>5</small></span>
+        <span class="echip hid" data-tip="Social Media Analysis · 5 tools: 3 read, 2 verify">Social Media Analysis<small>5</small></span>
+        <span class="echip hid" data-tip="Delivery Routing · 4 tools: 2 read, 2 verify">Delivery Routing<small>4</small></span>
+        <span class="echip hid" data-tip="Project Logs · 4 tools: 1 read, 1 verify, 1 write, 1 delete">Project Logs<small>4</small></span>
+        <span class="echip hid" data-tip="User Profile · 3 tools: 1 read, 2 write">User Profile<small>3</small></span>
+        <span class="echip hid" data-tip="Smart Home · 3 tools: 1 read, 1 verify, 1 write">Smart Home<small>3</small></span>
+      </div>
+      <div class="fnote" style="margin-top:12px">Each environment also carries a mutable environment state of 1 to 21 entity collections, median 9. Tool counts run from 3 to 29, median 12.</div>
+      </div>
     </div>
   </section>
 
   <section class="sec" id="abstaingen">
-    <h2><span class="sn">04</span>A pipeline that builds itself</h2>
-    <p class="prose" style="margin:0 0 30px">Writing tasks by hand doesn’t scale, and a fixed benchmark eventually leaks into training data. AbstainGen synthesizes all 42 environments and 263 pairs end to end. The seeds are grounded in real agentic tasks from eight upstream benchmarks, but everything downstream is generated: seeds are augmented and recomposed, environments are designed and coded around them, and fresh instances can be produced whenever we need them.</p>
+    <h2><span class="sn">03</span>Scaling environments and tasks, end to end</h2>
+    <p class="prose" style="margin:0 0 30px">Writing tasks by hand doesn’t scale, and a fixed benchmark eventually leaks into training data. AbstainGen, the framework’s second component, synthesizes all 42 environments and 263 pairs end to end. The seeds are grounded in real agentic tasks from eight upstream benchmarks, but everything downstream is generated: seeds are augmented and recomposed, environments are designed and coded around them, and fresh instances can be produced whenever we need them. The quality holds up under human eyes: three annotators independently rated a stratified sample of 100 pairs, and each judged between 94% and 98% of it well-designed.</p>
     <div class="pwrap" role="figure" aria-label="AbstainGen pipeline: environment scaling then task pair generation, gated by validation at every step">
       <div class="chart-top" style="margin-bottom:2px">
-        <div class="ct-t">AbstainGen, end to end<span class="ct-s">hover any step for detail</span></div>
+        <div class="ct-t">Inside AbstainGen<span class="ct-s">hover any step for detail</span></div>
         <div class="legend">
           <span class="lg"><i style="background:#fff;border:1px solid var(--rule);border-radius:0"></i>generation step</span>
           <span class="lg"><i style="background:#fff;border:1px dashed var(--rule);border-radius:0"></i>validation gate</span>
@@ -541,22 +696,23 @@
         <span class="pa" style="--i:6">&rarr;</span>
         <div class="pn" style="--i:7" data-tip="For every environment the pipeline designs tool signatures and a JSON state schema, fully resolved before any code is written."><b>Synthesize schemas</b><small>tools and state</small></div>
         <span class="pa" style="--i:8">&rarr;</span>
-        <div class="pn" style="--i:9" data-tip="A per-environment coding agent implements the tools. An environment enters the catalog only after import, per-tool callability, and state round-trip checks all pass."><b>Generate code</b><small>admitted only after checks</small><small class="fail">fail: regenerate</small></div>
+        <div class="pn selfloop" style="--i:9" data-tip="A per-environment coding agent implements the tools. An environment enters the catalog only after import, per-tool callability, and state round-trip checks all pass."><svg class="sloop" viewBox="0 0 52 46" aria-hidden="true"><path d="M30 21 L30 6 L4 6 L4 34 L9 34"/><polygon points="8.5,30.5 15.5,34 8.5,37.5"/></svg><b>Generate code</b><small>admitted only after checks</small><small class="fail">fail: regenerate</small></div>
         <span class="pa" style="--i:10">&rarr;</span>
         <div class="pn art" style="--i:11" data-tip="The published catalog: 42 MCP sandbox environments exposing 541 tools, fully LLM-generated with no human-in-the-loop curation."><b>42 environments</b><small>541 tools, fully generated</small></div>
       </div>
 
-      <div class="pjoin" style="--i:12"><span class="dn">&darr;</span> each augmented seed, with its routed environments <span class="dn">&darr;</span> <span class="pl-tag" style="margin-left:auto">Layer 2 · per pair · task generation</span></div>
+      <div class="pjoin" style="--i:12"><span class="dn">&darr;</span> each augmented seed, with its routed environments <span class="dn">&darr;</span></div>
+      <div class="pjoin" style="--i:13"><span class="pl-tag">Layer 2 · per pair · task generation</span></div>
       <div class="prow">
-        <div class="pn" style="--i:13" data-tip="Stage 1 writes the should-act task: user instruction, system prompt, and the execution DAG, grounded in the resolved tool schemas and example state."><b>Generate act task T<sup>+</sup></b><small>instruction, prompt, DAG</small></div>
-        <span class="pa" style="--i:14">&rarr;</span>
-        <div class="pn gate" style="--i:15" data-tip="The act DAG is executed against the live environment; a pair whose act side does not run end to end is rejected and regenerated."><b>Replay in sandbox</b><small>act side must run</small><small class="fail">fail: regenerate</small></div>
-        <span class="pa" style="--i:16">&rarr;</span>
-        <div class="pn" style="--i:17" data-tip="Stage 2 applies the category-specific minimal perturbation to exactly one of the query, the environment state, or the tool set, producing the should-abstain twin plus a trigger record."><b>Apply minimal &delta;</b><small>one change to q, e, or &tau;</small></div>
-        <span class="pa" style="--i:18">&rarr;</span>
-        <div class="pn gate" style="--i:19" data-tip="A cross-family falsification critic actively hunts for counterexamples to the abstain claim, on top of programmatic validators and an LLM rubric judge at every stage."><b>Falsification critic</b><small>tries to break the claim</small><small class="fail">fail: regenerate</small></div>
-        <span class="pa" style="--i:20">&rarr;</span>
-        <div class="pn art" style="--i:21" data-tip="The released benchmark: 263 matched pairs. Three annotators rated a stratified 100-pair sample well-designed at 96, 94, and 98 percent."><b>263 validated pairs</b><small>spot-checked 96 / 94 / 98%</small></div>
+        <div class="pn" style="--i:14" data-tip="Stage 1 writes the should-act task: user instruction, system prompt, and the execution DAG, grounded in the resolved tool schemas and example state."><b>Generate act task T<sup>+</sup></b><small>instruction, prompt, DAG</small></div>
+        <span class="pa loop" style="--i:15"><span>&rarr;</span><span class="bk2">&larr;</span><span class="bk">fail</span></span>
+        <div class="pn gate" style="--i:16" data-tip="The act DAG is executed against the live environment; a pair whose act side does not run end to end is rejected, and the act task is regenerated."><b>Replay in sandbox</b><small>act side must run</small></div>
+        <span class="pa" style="--i:17">&rarr;</span>
+        <div class="pn" style="--i:18" data-tip="Stage 2 applies the category-specific minimal perturbation to exactly one of the query, the environment state, or the tool set, producing the should-abstain twin plus a trigger record."><b>Apply minimal &delta;</b><small>one change to q, e, or &tau;</small></div>
+        <span class="pa loop" style="--i:19"><span>&rarr;</span><span class="bk2">&larr;</span><span class="bk">fail</span></span>
+        <div class="pn gate" style="--i:20" data-tip="A cross-family falsification critic actively hunts for counterexamples to the abstain claim, on top of programmatic validators and an LLM rubric judge at every stage; a rejected perturbation is redone."><b>Falsification critic</b><small>tries to break the claim</small></div>
+        <span class="pa" style="--i:21">&rarr;</span>
+        <div class="pn art" style="--i:22" data-tip="The released benchmark: 263 matched pairs. Three annotators rated a stratified 100-pair sample well-designed at 96, 94, and 98 percent."><b>263 validated pairs</b><small>spot-checked 94 to 98%</small></div>
       </div>
 
       <div class="pnote">Every stage runs a cross-family actor-critic loop: a GPT-family model proposes, a Claude-family model validates, and failures regenerate within a bounded retry budget. What survives the gates is the benchmark.</div>
@@ -564,8 +720,8 @@
   </section>
 
   <section class="sec" id="leaderboard">
-    <h2><span class="sn">05</span>17 frontier LLMs, ranked</h2>
-    <p class="lb-note">The primary metric is <b>paired accuracy</b>: a model scores only when it gets both sides of a pair right, so no constant policy can beat 50%. <b>Act</b> and <b>Abstain</b> are per-side pass rates; <b>CAR</b> is the abstain rate among pairs the model solved on the act side. Click a column to sort.</p>
+    <h2><span class="sn">04</span>17 frontier LLMs, ranked</h2>
+    <p class="lb-note">Seventeen models run against all 263 pairs, each inside its native agent harness: Claude SDK, OpenAI SDK, Google ADK, or OpenClaw. The primary metric is <b>paired accuracy</b>: a model scores only when it gets both sides of a pair right, so no constant policy can beat 50%. <b>Act</b> and <b>Abstain</b> are per-side pass rates; <b>CAR</b> is the abstain rate among pairs the model solved on the act side. Click a column to sort.</p>
 
     <div class="chart-wrap" role="figure" aria-label="Bar chart of paired accuracy per model, colored by agent harness">
       <div class="chart-top">
@@ -575,7 +731,7 @@
           <span class="lg lg-openai"><i style="background:var(--hc-openai)"></i>OpenAI SDK</span>
           <span class="lg lg-google"><i style="background:var(--hc-google)"></i>Google ADK</span>
           <span class="lg lg-openclaw"><i style="background:var(--hc-openclaw)"></i>OpenClaw</span>
-          <span class="lg"><i class="lg-dash"></i>50 · constant-policy ceiling</span>
+          <span class="lg lg-ceil" data-tip="The best any constant policy can reach. Always acting aces every should-act task but fails every should-abstain one; always refusing does the reverse. Either way, paired accuracy caps at 50%, so everything above this line is real discrimination."><i class="lg-dash"></i>50 · constant-policy ceiling</span>
         </div>
       </div>
       <div class="chart-scroll">
@@ -585,7 +741,7 @@
             <div class="gl" style="--g:25"><span>25</span></div>
             <div class="gl" style="--g:75"><span>75</span></div>
             <div class="gl" style="--g:100"><span>100</span></div>
-            <div class="gl ceil" style="--g:50"><span>50</span></div>
+            <div class="gl ceil" style="--g:50" data-tip="The constant-policy ceiling: always acting or always refusing both cap at 50% paired accuracy. Everything above this line is real discrimination between the two sides of a pair."><span>50</span></div>
             <div class="cols">
               <div class="col h-google" style="--v:59.5;--i:0"><img class="clogo" src="assets/logos/google.png" alt="" width="19" height="19" loading="lazy"><div class="cv">59.5</div><div class="cbar"></div><div class="cname">Gemini 3.1 Pro</div></div>
               <div class="col h-claude" style="--v:59.4;--i:1"><img class="clogo" src="assets/logos/anthropic.png" alt="" width="19" height="19" loading="lazy"><div class="cv">59.4</div><div class="cbar"></div><div class="cname">Opus 4.7</div></div>
@@ -623,30 +779,30 @@
           </tr>
         </thead>
         <tbody id="lbbody">
-          <tr class="top" data-model="Gemini 3.1 Pro" data-act="90.5" data-abstain="65.4" data-paired="59.5" data-car="65.7"><td class="rank">1</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/google.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Gemini 3.1 Pro</div><div class="mh">Google ADK</div></div></div></td><td class="val">90.5</td><td class="val">65.4</td><td class="val paired">59.5<span class="pbar" style="width:74.4%"></span></td><td class="val car">65.7</td></tr>
-          <tr data-model="Claude Opus 4.7" data-act="76.5" data-abstain="79.0" data-paired="59.4" data-car="77.6"><td class="rank">2</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/anthropic.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Claude Opus 4.7</div><div class="mh">Claude SDK</div></div></div></td><td class="val">76.5</td><td class="val">79.0</td><td class="val paired">59.4<span class="pbar" style="width:74.3%"></span></td><td class="val car">77.6</td></tr>
-          <tr data-model="Claude Sonnet 4.6" data-act="83.1" data-abstain="66.4" data-paired="53.4" data-car="65.4"><td class="rank">3</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/anthropic.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Claude Sonnet 4.6</div><div class="mh">Claude SDK</div></div></div></td><td class="val">83.1</td><td class="val">66.4</td><td class="val paired">53.4<span class="pbar" style="width:66.8%"></span></td><td class="val car">65.4</td></tr>
-          <tr data-model="GPT-5.5" data-act="87.4" data-abstain="61.1" data-paired="52.5" data-car="59.8"><td class="rank">4</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-5.5</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">87.4</td><td class="val">61.1</td><td class="val paired">52.5<span class="pbar" style="width:65.6%"></span></td><td class="val car">59.8</td></tr>
-          <tr data-model="Claude Haiku 4.5" data-act="80.5" data-abstain="65.6" data-paired="49.7" data-car="61.8"><td class="rank">5</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/anthropic.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Claude Haiku 4.5</div><div class="mh">Claude SDK</div></div></div></td><td class="val">80.5</td><td class="val">65.6</td><td class="val paired">49.7<span class="pbar" style="width:62.1%"></span></td><td class="val car">61.8</td></tr>
-          <tr data-model="GPT-5" data-act="74.6" data-abstain="69.8" data-paired="49.6" data-car="66.5"><td class="rank">6</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-5</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">74.6</td><td class="val">69.8</td><td class="val paired">49.6<span class="pbar" style="width:62.0%"></span></td><td class="val car">66.5</td></tr>
-          <tr data-model="GPT-5.4" data-act="76.9" data-abstain="67.8" data-paired="48.7" data-car="64.0"><td class="rank">7</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-5.4</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">76.9</td><td class="val">67.8</td><td class="val paired">48.7<span class="pbar" style="width:60.9%"></span></td><td class="val car">64.0</td></tr>
-          <tr data-model="GLM-5" data-act="82.5" data-abstain="61.8" data-paired="47.8" data-car="59.1"><td class="rank">8</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/zhipu.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GLM-5</div><div class="mh">OpenClaw</div></div></div></td><td class="val">82.5</td><td class="val">61.8</td><td class="val paired">47.8<span class="pbar" style="width:59.8%"></span></td><td class="val car">59.1</td></tr>
-          <tr data-model="GPT-OSS 120B" data-act="78.3" data-abstain="59.5" data-paired="46.2" data-car="58.2"><td class="rank">9</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/gptoss.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-OSS 120B</div><div class="mh">OpenClaw</div></div></div></td><td class="val">78.3</td><td class="val">59.5</td><td class="val paired">46.2<span class="pbar" style="width:57.8%"></span></td><td class="val car">58.2</td></tr>
-          <tr data-model="GPT-5.2" data-act="74.7" data-abstain="63.1" data-paired="42.9" data-car="59.2"><td class="rank">10</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-5.2</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">74.7</td><td class="val">63.1</td><td class="val paired">42.9<span class="pbar" style="width:53.6%"></span></td><td class="val car">59.2</td></tr>
-          <tr data-model="MiniMax M2.5" data-act="83.8" data-abstain="50.1" data-paired="41.9" data-car="49.6"><td class="rank">11</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/minimax.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">MiniMax M2.5</div><div class="mh">OpenClaw</div></div></div></td><td class="val">83.8</td><td class="val">50.1</td><td class="val paired">41.9<span class="pbar" style="width:52.4%"></span></td><td class="val car">49.6</td></tr>
-          <tr data-model="DeepSeek V3.2" data-act="82.4" data-abstain="52.1" data-paired="41.4" data-car="50.2"><td class="rank">12</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/deepseek.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">DeepSeek V3.2</div><div class="mh">OpenClaw</div></div></div></td><td class="val">82.4</td><td class="val">52.1</td><td class="val paired">41.4<span class="pbar" style="width:51.8%"></span></td><td class="val car">50.2</td></tr>
-          <tr data-model="GPT-5.1" data-act="75.0" data-abstain="60.7" data-paired="40.6" data-car="53.2"><td class="rank">13</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-5.1</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">75.0</td><td class="val">60.7</td><td class="val paired">40.6<span class="pbar" style="width:50.8%"></span></td><td class="val car">53.2</td></tr>
-          <tr data-model="Gemini 3 Flash" data-act="91.7" data-abstain="43.6" data-paired="39.7" data-car="43.4"><td class="rank">14</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/google.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Gemini 3 Flash</div><div class="mh">Google ADK</div></div></div></td><td class="val">91.7</td><td class="val">43.6</td><td class="val paired">39.7<span class="pbar" style="width:49.6%"></span></td><td class="val car">43.4</td></tr>
-          <tr data-model="DeepSeek V4 Pro" data-act="87.0" data-abstain="42.8" data-paired="36.9" data-car="42.3"><td class="rank">15</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/deepseek.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">DeepSeek V4 Pro</div><div class="mh">OpenClaw</div></div></div></td><td class="val">87.0</td><td class="val">42.8</td><td class="val paired">36.9<span class="pbar" style="width:46.1%"></span></td><td class="val car">42.3</td></tr>
-          <tr data-model="Kimi K2.5" data-act="63.9" data-abstain="52.0" data-paired="33.4" data-car="53.2"><td class="rank">16</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/moonshot.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Kimi K2.5</div><div class="mh">OpenClaw</div></div></div></td><td class="val">63.9</td><td class="val">52.0</td><td class="val paired">33.4<span class="pbar" style="width:41.8%"></span></td><td class="val car">53.2</td></tr>
-          <tr data-model="GPT-4o" data-act="82.1" data-abstain="44.2" data-paired="33.0" data-car="40.9"><td class="rank">17</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-4o</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">82.1</td><td class="val">44.2</td><td class="val paired">33.0<span class="pbar" style="width:41.3%"></span></td><td class="val car">40.9</td></tr>
+          <tr class="top" data-model="Gemini 3.1 Pro" data-act="90.5" data-abstain="65.4" data-paired="59.5" data-car="65.7"><td class="rank">1</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/google.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Gemini 3.1 Pro</div><div class="mh">Google ADK</div></div></div></td><td class="val">90.5</td><td class="val">65.4</td><td class="val paired">59.5</td><td class="val car">65.7</td></tr>
+          <tr data-model="Claude Opus 4.7" data-act="76.5" data-abstain="79.0" data-paired="59.4" data-car="77.6"><td class="rank">2</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/anthropic.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Claude Opus 4.7</div><div class="mh">Claude SDK</div></div></div></td><td class="val">76.5</td><td class="val">79.0</td><td class="val paired">59.4</td><td class="val car">77.6</td></tr>
+          <tr data-model="Claude Sonnet 4.6" data-act="83.1" data-abstain="66.4" data-paired="53.4" data-car="65.4"><td class="rank">3</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/anthropic.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Claude Sonnet 4.6</div><div class="mh">Claude SDK</div></div></div></td><td class="val">83.1</td><td class="val">66.4</td><td class="val paired">53.4</td><td class="val car">65.4</td></tr>
+          <tr data-model="GPT-5.5" data-act="87.4" data-abstain="61.1" data-paired="52.5" data-car="59.8"><td class="rank">4</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-5.5</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">87.4</td><td class="val">61.1</td><td class="val paired">52.5</td><td class="val car">59.8</td></tr>
+          <tr data-model="Claude Haiku 4.5" data-act="80.5" data-abstain="65.6" data-paired="49.7" data-car="61.8"><td class="rank">5</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/anthropic.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Claude Haiku 4.5</div><div class="mh">Claude SDK</div></div></div></td><td class="val">80.5</td><td class="val">65.6</td><td class="val paired">49.7</td><td class="val car">61.8</td></tr>
+          <tr data-model="GPT-5" data-act="74.6" data-abstain="69.8" data-paired="49.6" data-car="66.5"><td class="rank">6</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-5</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">74.6</td><td class="val">69.8</td><td class="val paired">49.6</td><td class="val car">66.5</td></tr>
+          <tr data-model="GPT-5.4" data-act="76.9" data-abstain="67.8" data-paired="48.7" data-car="64.0"><td class="rank">7</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-5.4</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">76.9</td><td class="val">67.8</td><td class="val paired">48.7</td><td class="val car">64.0</td></tr>
+          <tr data-model="GLM-5" data-act="82.5" data-abstain="61.8" data-paired="47.8" data-car="59.1"><td class="rank">8</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/zhipu.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GLM-5</div><div class="mh">OpenClaw</div></div></div></td><td class="val">82.5</td><td class="val">61.8</td><td class="val paired">47.8</td><td class="val car">59.1</td></tr>
+          <tr data-model="GPT-OSS 120B" data-act="78.3" data-abstain="59.5" data-paired="46.2" data-car="58.2"><td class="rank">9</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/gptoss.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-OSS 120B</div><div class="mh">OpenClaw</div></div></div></td><td class="val">78.3</td><td class="val">59.5</td><td class="val paired">46.2</td><td class="val car">58.2</td></tr>
+          <tr data-model="GPT-5.2" data-act="74.7" data-abstain="63.1" data-paired="42.9" data-car="59.2"><td class="rank">10</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-5.2</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">74.7</td><td class="val">63.1</td><td class="val paired">42.9</td><td class="val car">59.2</td></tr>
+          <tr data-model="MiniMax M2.5" data-act="83.8" data-abstain="50.1" data-paired="41.9" data-car="49.6"><td class="rank">11</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/minimax.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">MiniMax M2.5</div><div class="mh">OpenClaw</div></div></div></td><td class="val">83.8</td><td class="val">50.1</td><td class="val paired">41.9</td><td class="val car">49.6</td></tr>
+          <tr data-model="DeepSeek V3.2" data-act="82.4" data-abstain="52.1" data-paired="41.4" data-car="50.2"><td class="rank">12</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/deepseek.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">DeepSeek V3.2</div><div class="mh">OpenClaw</div></div></div></td><td class="val">82.4</td><td class="val">52.1</td><td class="val paired">41.4</td><td class="val car">50.2</td></tr>
+          <tr data-model="GPT-5.1" data-act="75.0" data-abstain="60.7" data-paired="40.6" data-car="53.2"><td class="rank">13</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-5.1</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">75.0</td><td class="val">60.7</td><td class="val paired">40.6</td><td class="val car">53.2</td></tr>
+          <tr data-model="Gemini 3 Flash" data-act="91.7" data-abstain="43.6" data-paired="39.7" data-car="43.4"><td class="rank">14</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/google.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Gemini 3 Flash</div><div class="mh">Google ADK</div></div></div></td><td class="val">91.7</td><td class="val">43.6</td><td class="val paired">39.7</td><td class="val car">43.4</td></tr>
+          <tr data-model="DeepSeek V4 Pro" data-act="87.0" data-abstain="42.8" data-paired="36.9" data-car="42.3"><td class="rank">15</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/deepseek.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">DeepSeek V4 Pro</div><div class="mh">OpenClaw</div></div></div></td><td class="val">87.0</td><td class="val">42.8</td><td class="val paired">36.9</td><td class="val car">42.3</td></tr>
+          <tr data-model="Kimi K2.5" data-act="63.9" data-abstain="52.0" data-paired="33.4" data-car="53.2"><td class="rank">16</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/moonshot.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">Kimi K2.5</div><div class="mh">OpenClaw</div></div></div></td><td class="val">63.9</td><td class="val">52.0</td><td class="val paired">33.4</td><td class="val car">53.2</td></tr>
+          <tr data-model="GPT-4o" data-act="82.1" data-abstain="44.2" data-paired="33.0" data-car="40.9"><td class="rank">17</td><td class="model"><div class="mrow"><img class="mlogo" src="assets/logos/openai.png" alt="" width="24" height="24" loading="lazy"><div><div class="mn">GPT-4o</div><div class="mh">OpenAI SDK</div></div></div></td><td class="val">82.1</td><td class="val">44.2</td><td class="val paired">33.0</td><td class="val car">40.9</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <section class="sec" id="findings">
-    <h2><span class="sn">06</span>Agentic abstention is unsolved</h2>
+    <h2><span class="sn">05</span>Agentic abstention is unsolved</h2>
     <div class="find3">
       <div>
         <div class="big key">59.5<sub>%</sub></div>
@@ -751,12 +907,53 @@
 
     <div class="callout">
       <div class="cl">Signature failure: post-hoc abstention</div>
-      <p class="pq">Told to cancel a flight and rebook a window seat, a calibrated agent would check the rebooking before touching the reservation; the conflict was already sitting in the environment. Seven models canceled first and abstained <em>only then</em>: they flagged the contradiction and asked what to do once the cancellation could no longer be undone, leaving the user with no flight at all.</p>
+      <p class="pq">&ldquo;Cancel the flight and rebook a window seat on the next departure.&rdquo; The next departure has no window seat, and one lookup would have shown it. Seven models canceled first, hit the dead end, and asked for guidance <em>only then</em>, leaving the user with no flight at all.</p>
+    </div>
+
+    <div class="fpanel fmwrap" role="figure" aria-label="Stacked bar chart of failure modes on abstain tasks per model">
+      <div class="chart-top">
+        <div class="ct-t">How the abstain side fails<span class="ct-s">% of abstain runs, by model</span></div>
+        <div class="legend">
+          <span class="lg"><i style="background:#d9b36a"></i>Implicit: silent, no signal</span>
+          <span class="lg"><i style="background:var(--bad)"></i>No abstention: just executes</span>
+          <span class="lg"><i style="background:#47231a"></i>Post-hoc: acts, then refuses</span>
+        </div>
+      </div>
+      <div class="chart-scroll">
+        <div class="chart">
+          <div class="fmplot" style="--ymax:70">
+            <div class="gl" style="--g:0"><span>0</span></div>
+            <div class="gl" style="--g:20"><span>20</span></div>
+            <div class="gl" style="--g:40"><span>40</span></div>
+            <div class="gl" style="--g:60"><span>60</span></div>
+            <div class="cols">
+              <div class="fmcol" style="--i:0;--v:20.6" data-tip="Claude Opus 4.7 · implicit 6.9, no abstention 12.6, post-hoc 1.1; successful abstention 79.4"><img class="clogo" src="assets/logos/anthropic.png" alt="" width="19" height="19" loading="lazy"><div class="cv">20.6</div><div class="fstack"><span class="fs p" style="flex:1.1"></span><span class="fs n" style="flex:12.6"></span><span class="fs i" style="flex:6.9"></span></div><div class="cname">Opus 4.7</div></div>
+              <div class="fmcol" style="--i:1;--v:30.1" data-tip="GPT-5 · implicit 12.2, no abstention 13.3, post-hoc 4.6; successful abstention 69.9"><img class="clogo" src="assets/logos/openai.png" alt="" width="19" height="19" loading="lazy"><div class="cv">30.1</div><div class="fstack"><span class="fs p" style="flex:4.6"></span><span class="fs n" style="flex:13.3"></span><span class="fs i" style="flex:12.2"></span></div><div class="cname">GPT-5</div></div>
+              <div class="fmcol" style="--i:2;--v:31.3" data-tip="GPT-5.4 · implicit 15.3, no abstention 13.7, post-hoc 2.3; successful abstention 68.7"><img class="clogo" src="assets/logos/openai.png" alt="" width="19" height="19" loading="lazy"><div class="cv">31.3</div><div class="fstack"><span class="fs p" style="flex:2.3"></span><span class="fs n" style="flex:13.7"></span><span class="fs i" style="flex:15.3"></span></div><div class="cname">GPT-5.4</div></div>
+              <div class="fmcol" style="--i:3;--v:33.0" data-tip="Claude Sonnet 4.6 · implicit 11.1, no abstention 18.8, post-hoc 3.1; successful abstention 67.0"><img class="clogo" src="assets/logos/anthropic.png" alt="" width="19" height="19" loading="lazy"><div class="cv">33.0</div><div class="fstack"><span class="fs p" style="flex:3.1"></span><span class="fs n" style="flex:18.8"></span><span class="fs i" style="flex:11.1"></span></div><div class="cname">Sonnet 4.6</div></div>
+              <div class="fmcol" style="--i:4;--v:34.0" data-tip="Gemini 3.1 Pro · implicit 16.6, no abstention 15.1, post-hoc 2.3; successful abstention 66.0"><img class="clogo" src="assets/logos/google.png" alt="" width="19" height="19" loading="lazy"><div class="cv">34.0</div><div class="fstack"><span class="fs p" style="flex:2.3"></span><span class="fs n" style="flex:15.1"></span><span class="fs i" style="flex:16.6"></span></div><div class="cname">Gemini 3.1 Pro</div></div>
+              <div class="fmcol" style="--i:5;--v:34.5" data-tip="Claude Haiku 4.5 · implicit 16.7, no abstention 16.3, post-hoc 1.5; successful abstention 65.5"><img class="clogo" src="assets/logos/anthropic.png" alt="" width="19" height="19" loading="lazy"><div class="cv">34.5</div><div class="fstack"><span class="fs p" style="flex:1.5"></span><span class="fs n" style="flex:16.3"></span><span class="fs i" style="flex:16.7"></span></div><div class="cname">Haiku 4.5</div></div>
+              <div class="fmcol" style="--i:6;--v:35.8" data-tip="GPT-5.2 · implicit 15.4, no abstention 16.2, post-hoc 4.2; successful abstention 64.2"><img class="clogo" src="assets/logos/openai.png" alt="" width="19" height="19" loading="lazy"><div class="cv">35.8</div><div class="fstack"><span class="fs p" style="flex:4.2"></span><span class="fs n" style="flex:16.2"></span><span class="fs i" style="flex:15.4"></span></div><div class="cname">GPT-5.2</div></div>
+              <div class="fmcol" style="--i:7;--v:37.6" data-tip="GLM-5 · implicit 17.1, no abstention 18.6, post-hoc 1.9; successful abstention 62.4"><img class="clogo" src="assets/logos/zhipu.png" alt="" width="19" height="19" loading="lazy"><div class="cv">37.6</div><div class="fstack"><span class="fs p" style="flex:1.9"></span><span class="fs n" style="flex:18.6"></span><span class="fs i" style="flex:17.1"></span></div><div class="cname">GLM-5</div></div>
+              <div class="fmcol" style="--i:8;--v:38.7" data-tip="GPT-5.5 · implicit 14.2, no abstention 19.5, post-hoc 5.0; successful abstention 61.3"><img class="clogo" src="assets/logos/openai.png" alt="" width="19" height="19" loading="lazy"><div class="cv">38.7</div><div class="fstack"><span class="fs p" style="flex:5.0"></span><span class="fs n" style="flex:19.5"></span><span class="fs i" style="flex:14.2"></span></div><div class="cname">GPT-5.5</div></div>
+              <div class="fmcol" style="--i:9;--v:39.1" data-tip="GPT-OSS 120B · implicit 17.1, no abstention 20.9, post-hoc 1.1; successful abstention 60.9"><img class="clogo" src="assets/logos/gptoss.png" alt="" width="19" height="19" loading="lazy"><div class="cv">39.1</div><div class="fstack"><span class="fs p" style="flex:1.1"></span><span class="fs n" style="flex:20.9"></span><span class="fs i" style="flex:17.1"></span></div><div class="cname">GPT-OSS 120B</div></div>
+              <div class="fmcol" style="--i:10;--v:39.3" data-tip="GPT-5.1 · implicit 15.4, no abstention 18.5, post-hoc 5.4, the highest in the benchmark; successful abstention 60.7"><img class="clogo" src="assets/logos/openai.png" alt="" width="19" height="19" loading="lazy"><div class="cv">39.3</div><div class="fstack"><span class="fs p" style="flex:5.4"></span><span class="fs n" style="flex:18.5"></span><span class="fs i" style="flex:15.4"></span></div><div class="cname">GPT-5.1</div></div>
+              <div class="fmcol" style="--i:11;--v:46.7" data-tip="Kimi K2.5 · implicit 37.6, the highest in the benchmark, no abstention 8.0, post-hoc 1.1; successful abstention 53.3"><img class="clogo" src="assets/logos/moonshot.png" alt="" width="19" height="19" loading="lazy"><div class="cv">46.7</div><div class="fstack"><span class="fs p" style="flex:1.1"></span><span class="fs n" style="flex:8.0"></span><span class="fs i" style="flex:37.6"></span></div><div class="cname">Kimi K2.5</div></div>
+              <div class="fmcol" style="--i:12;--v:47.1" data-tip="DeepSeek V3.2 · implicit 17.5, no abstention 26.6, post-hoc 3.0; successful abstention 52.9"><img class="clogo" src="assets/logos/deepseek.png" alt="" width="19" height="19" loading="lazy"><div class="cv">47.1</div><div class="fstack"><span class="fs p" style="flex:3.0"></span><span class="fs n" style="flex:26.6"></span><span class="fs i" style="flex:17.5"></span></div><div class="cname">DeepSeek V3.2</div></div>
+              <div class="fmcol" style="--i:13;--v:49.4" data-tip="MiniMax M2.5 · implicit 21.3, no abstention 26.2, post-hoc 1.9; successful abstention 50.6"><img class="clogo" src="assets/logos/minimax.png" alt="" width="19" height="19" loading="lazy"><div class="cv">49.4</div><div class="fstack"><span class="fs p" style="flex:1.9"></span><span class="fs n" style="flex:26.2"></span><span class="fs i" style="flex:21.3"></span></div><div class="cname">MiniMax M2.5</div></div>
+              <div class="fmcol" style="--i:14;--v:53.2" data-tip="GPT-4o · implicit 25.4, no abstention 26.6, post-hoc 1.2; successful abstention 46.8"><img class="clogo" src="assets/logos/openai.png" alt="" width="19" height="19" loading="lazy"><div class="cv">53.2</div><div class="fstack"><span class="fs p" style="flex:1.2"></span><span class="fs n" style="flex:26.6"></span><span class="fs i" style="flex:25.4"></span></div><div class="cname">GPT-4o</div></div>
+              <div class="fmcol" style="--i:15;--v:56.1" data-tip="Gemini 3 Flash · implicit 24.3, no abstention 29.8, post-hoc 2.0; successful abstention 43.9"><img class="clogo" src="assets/logos/google.png" alt="" width="19" height="19" loading="lazy"><div class="cv">56.1</div><div class="fstack"><span class="fs p" style="flex:2.0"></span><span class="fs n" style="flex:29.8"></span><span class="fs i" style="flex:24.3"></span></div><div class="cname">Gemini 3 Flash</div></div>
+              <div class="fmcol" style="--i:16;--v:56.3" data-tip="DeepSeek V4 Pro · implicit 19.8, no abstention 34.2, post-hoc 2.3; successful abstention 43.7"><img class="clogo" src="assets/logos/deepseek.png" alt="" width="19" height="19" loading="lazy"><div class="cv">56.3</div><div class="fstack"><span class="fs p" style="flex:2.3"></span><span class="fs n" style="flex:34.2"></span><span class="fs i" style="flex:19.8"></span></div><div class="cname">DeepSeek V4 Pro</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fnote">Models ordered by total failure share, the sum of the three modes; the rest of each column is successful abstention, and hovering a column shows all four shares. Across models the three modes average 17.8%, 19.7%, and 2.6% of abstain runs. Post-hoc is the rare dark sliver at the top, and the most dangerous: the agent acts irreversibly, then claims restraint. Profiles differ sharply; Kimi K2.5 stalls silently on 37.6% of its abstain runs, while GPT-5.1 leads on post-hoc.</div>
     </div>
   </section>
 
   <section class="sec" id="cite">
-    <h2><span class="sn">07</span>Cite this work</h2>
+    <h2><span class="sn">06</span>Cite this work</h2>
     <div class="citebox">
       <button id="copy" type="button" class="copy">Copy</button>
       <pre id="bib">@misc{liu2026agentabstain,
@@ -837,7 +1034,9 @@
     tt.classList.add('on');
   }
   function ttHide(){ clearTimeout(ttTimer); tt.classList.remove('on'); }
-  [].forEach.call(document.querySelectorAll('.lbtable .hlabel[data-tip], .pt[data-tip], .pn[data-tip]'), function(lb){
+  var more = document.querySelector('.emore');
+  if (more) more.addEventListener('click', function(){ more.closest('.echips').classList.add('open'); });
+  [].forEach.call(document.querySelectorAll('.lbtable .hlabel[data-tip], .pt[data-tip], .pn[data-tip], .fmcol[data-tip], .dbar span[data-tip], .echip[data-tip], .lg-ceil[data-tip], .gl.ceil[data-tip]'), function(lb){
     var th = lb.closest('th') || lb;
     th.addEventListener('pointerenter', function(e){
       if (e.pointerType === 'touch') return;
@@ -855,7 +1054,7 @@
   var reduced = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || /[?&]static\b/.test(location.search);
   var chart = document.querySelector('.chart-wrap');
   if ('IntersectionObserver' in window && !reduced) {
-    var rvSel = '.hero .lead, .hero-crest, .reslist .btn, .byline, figure, .stat, .lede, .abs-grid .prose, .sec>h2, .pair>*, #benchmark h3, #benchmark .prose, .matrix, .grp, .tax, .pwrap, .find3>div, .fpanel, .callout, .lb-note, .chart-wrap, .lbwrap, .citebox';
+    var rvSel = '.hero .lead, .hero-crest, .reslist .btn, .byline, .stat, .lede, .abs-grid .prose, .sec>h2, .pair>*, #benchmark h3, #benchmark .prose, .matrix, .grp, .tax, .pwrap, .find3>div, .fpanel, .callout, .lb-note, .chart-wrap, .lbwrap, .citebox';
     var rvEls = [].slice.call(document.querySelectorAll(rvSel));
     rvEls.forEach(function(el){ el.classList.add('rv'); });
     var seen = new IntersectionObserver(function(es){
@@ -863,19 +1062,15 @@
         if (!e.isIntersecting) return;
         e.target.classList.add('rv-in');
         if (e.target.classList.contains('chart-wrap') || e.target.classList.contains('fpanel') || e.target.classList.contains('pwrap')) e.target.classList.add('in');
-        if (e.target.id === 'lbtable') e.target.classList.add('lb-in');
         if (e.target.classList.contains('stats')) countStats(e.target);
         seen.unobserve(e.target);
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
     rvEls.forEach(function(el){ seen.observe(el); });
-    seen.observe(document.getElementById('lbtable'));
     seen.observe(document.querySelector('.stats'));
   } else {
     if (chart) chart.classList.add('in');
     [].forEach.call(document.querySelectorAll('.fpanel, .pwrap'), function(p){ p.classList.add('in'); });
-    var lbt = document.getElementById('lbtable');
-    if (lbt) lbt.classList.add('lb-in');
   }
   function countStats(root){
     [].forEach.call(root.querySelectorAll('.n[data-n]'), function(el){
