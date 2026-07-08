@@ -4,16 +4,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AgentAbstain: Do LLM Agents Know When Not to Act?</title>
-<meta name="description" content="AgentAbstain is a paired-task benchmark for agentic abstention: 263 task pairs across 42 sandbox environments and 541 tools, evaluating 17 frontier LLMs. The best reaches 59.5% paired accuracy.">
+<meta name="description" content="A paired-task benchmark for agentic abstention: when should an LLM agent refuse or ask instead of acting? Even the best of 17 frontier models gets fewer than 60% of pairs right.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="AgentAbstain">
 <meta property="og:title" content="AgentAbstain: Do LLM Agents Know When Not to Act?">
-<meta property="og:description" content="A paired-task benchmark testing whether tool-using agents know when to abstain. 263 pairs, 42 environments, 17 models; best paired accuracy 59.5%.">
+<meta property="og:description" content="Every agent task is paired with a twin where acting is the wrong call. Across 263 pairs, 42 environments, and 17 frontier LLMs, even the best model gets fewer than 60% of pairs right.">
 <meta property="og:url" content="https://agentabstain.github.io/">
 <meta property="og:image" content="https://agentabstain.github.io/assets/logo-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="AgentAbstain logo: a robot raising a hand to stop">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://agentabstain.github.io/assets/logo-512.png">
 <meta name="theme-color" content="#f3f2ec">
 <link rel="canonical" href="https://agentabstain.github.io/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://agentabstain.github.io/#website",
+      "url": "https://agentabstain.github.io/",
+      "name": "AgentAbstain"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://agentabstain.github.io/#paper",
+      "headline": "AgentAbstain: Do LLM Agents Know When Not to Act?",
+      "url": "https://agentabstain.github.io/",
+      "image": "https://agentabstain.github.io/assets/logo-512.png",
+      "datePublished": "2026",
+      "description": "The first systematic evaluation framework for agentic abstention: whether tool-using LLM agents recognize when not to act. AgentAbstain is the benchmark, 263 paired tasks across 42 executable sandbox environments built on an agent-native taxonomy of eight abstention scenarios; AbstainGen is the pipeline that generates the environments and task pairs end to end. Across 17 frontier LLMs the best model reaches 59.5% paired accuracy, and abstention ability is largely independent of task-solving ability.",
+      "keywords": "agentic abstention, LLM agents, AI agent benchmark, abstention, refusal, clarification, tool use, AI safety, evaluation framework, when not to act",
+      "author": [
+        {"@type": "Person", "name": "Xun Liu"},
+        {"@type": "Person", "name": "Yi Evie Zhang"},
+        {"@type": "Person", "name": "Vira Kasprova"},
+        {"@type": "Person", "name": "Parisa Rabbani"},
+        {"@type": "Person", "name": "Pardis Sadat Zahraei"},
+        {"@type": "Person", "name": "Tianyu Zhang"},
+        {"@type": "Person", "name": "Ali Ebrahimpour-Boroojeny"},
+        {"@type": "Person", "name": "Varun Chandrasekaran"}
+      ],
+      "sourceOrganization": {"@type": "Organization", "name": "University of Illinois Urbana-Champaign"},
+      "isPartOf": {"@id": "https://agentabstain.github.io/#website"}
+    }
+  ]
+}
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%8B%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="assets/logo-512.png">
 <script>document.documentElement.classList.add('js')</script>
@@ -578,7 +617,10 @@
       <div class="fnote">The four outcomes of the matrix, on one real should-abstain task: the file metadata says version 2024, the reports registry says 2025. Only successful abstention, where the agent holds off and asks, counts as correct.</div>
     </div>
 
-    <div class="fpanel dstat" role="figure" aria-label="Benchmark composition: pairs per scenario, tool kinds, and perturbation dimensions">
+    <h3 style="font-family:var(--display);font-weight:500;font-size:21px;letter-spacing:-0.015em;margin:42px 0 8px">What&rsquo;s in the benchmark</h3>
+    <p class="prose" style="font-size:15px;margin:0 0 22px">How the pairs, the tools, and the 42 environments break down.</p>
+
+    <div class="fpanel dstat" style="margin-top:0" role="figure" aria-label="Benchmark composition: pairs per scenario, tool kinds, and perturbation dimensions">
       <div class="chart-top">
         <div class="ct-t">The benchmark at a glance<span class="ct-s">how the 263 pairs are built</span></div>
         <div class="legend">
