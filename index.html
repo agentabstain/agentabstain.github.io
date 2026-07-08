@@ -158,12 +158,24 @@
   .tax-row .nm{font-weight:600;font-size:15px}
   .tax-row .ex{font-size:14px;color:var(--muted)}
 
-  /* pipeline steps */
-  .steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
-  .steps li{display:grid;grid-template-columns:48px minmax(0,1fr);gap:18px;padding:20px 0;border-bottom:1px solid var(--hair)}
-  .steps .sn{font-family:var(--mono);font-size:14px;color:var(--muted)}
-  .steps h3{font-size:18px;font-weight:600;letter-spacing:-0.01em;margin:0 0 5px}
-  .steps p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.6}
+  /* pipeline diagram */
+  .pwrap{border:1px solid var(--rule);background:#fff;padding:20px 22px 16px}
+  .pl-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.03em;color:var(--muted);border:1px solid var(--hair);padding:2px 7px;border-radius:2px;white-space:nowrap}
+  .prow{display:flex;align-items:stretch;gap:7px;margin-top:12px}
+  .pn{flex:1;min-width:0;border:1px solid var(--rule);padding:9px 10px;display:flex;flex-direction:column;gap:3px;justify-content:center}
+  .pn b{font-family:var(--display);font-size:12px;font-weight:600;line-height:1.25}
+  .pn small{font-size:10.5px;color:var(--muted);line-height:1.4}
+  .pn small.fail{color:var(--bad);font-family:var(--mono);font-size:9px;letter-spacing:0.02em}
+  .pn.gate{border-style:dashed}
+  .pn.io{background:color-mix(in oklab,var(--ink) 4%,transparent)}
+  .pn.art{border-color:var(--abstain);background:var(--abstain-soft)}
+  .pn.art b{color:var(--abstain)}
+  .pa{align-self:center;flex:none;font-family:var(--display);color:var(--muted);font-size:15px}
+  .pjoin{display:flex;align-items:center;gap:9px;margin:12px 0 0;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .pjoin .dn{font-size:13px}
+  .pnote{font-size:11.5px;line-height:1.55;color:var(--muted);margin-top:16px;border-top:1px solid var(--hair);padding-top:12px}
+  html.js .pwrap .pn,html.js .pwrap .pa,html.js .pwrap .pjoin{opacity:0;translate:0 6px;transition:opacity .45s ease,translate .45s ease;transition-delay:calc(var(--i)*55ms)}
+  html.js .pwrap.in .pn,html.js .pwrap.in .pa,html.js .pwrap.in .pjoin{opacity:1;translate:0 0}
 
   /* leaderboard table */
   .lb-note{font-size:15px;color:var(--muted);margin:0 0 22px}
@@ -248,9 +260,6 @@
   html.js .reslist .btn.rv:nth-child(2){transition-delay:.08s}
   html.js .reslist .btn.rv:nth-child(3){transition-delay:.16s}
   html.js .reslist .btn.rv:nth-child(4){transition-delay:.24s}
-  html.js .steps li.rv:nth-child(2){transition-delay:.08s}
-  html.js .steps li.rv:nth-child(3){transition-delay:.16s}
-  html.js .steps li.rv:nth-child(4){transition-delay:.24s}
   html.js .find3>div.rv:nth-child(2){transition-delay:.1s}
   html.js .find3>div.rv:nth-child(3){transition-delay:.2s}
 
@@ -336,6 +345,10 @@
     .delta{flex-direction:row;min-width:0}
     .delta .sym{transform:rotate(90deg);animation-name:nudgeY}
     .fig2{grid-template-columns:1fr}
+    .prow{flex-direction:column}
+    .prow .pa{transform:rotate(90deg);padding:1px 0}
+    .pjoin{flex-wrap:wrap}
+    .pjoin .pl-tag{margin-left:0!important}
     .sec{scroll-margin-top:104px}
   }
   @media (max-width:560px){
@@ -353,6 +366,7 @@
     html.js .lbtable .pbar{transform:none;transition:none}
     html.js .fpanel .pt{opacity:1;transition:none}
     html.js .cat .fill{transform:none;transition:none}
+    html.js .pwrap .pn,html.js .pwrap .pa,html.js .pwrap .pjoin{opacity:1;translate:0 0;transition:none}
   }
 </style>
 </head>
@@ -506,13 +520,47 @@
 
   <section class="sec" id="abstaingen">
     <h2><span class="sn">04</span>A pipeline that builds itself</h2>
-    <p class="prose" style="margin:0 0 30px">Writing tasks by hand doesn’t scale, and a fixed benchmark eventually leaks into training data. AbstainGen builds all 42 environments and 263 pairs from seeds taken from eight existing benchmarks, so we can make fresh ones whenever we need them.</p>
-    <ol class="steps">
-      <li><span class="sn">01</span><div><h3>Synthesize environments</h3><p>Seed augmentation, capability clustering, schema synthesis, and per-environment code generation, run offline.</p></div></li>
-      <li><span class="sn">02</span><div><h3>Generate the pair</h3><p>Build the act task and its execution DAG, then apply the minimal δ that turns it into the should-abstain twin.</p></div></li>
-      <li><span class="sn">03</span><div><h3>Replay and critique</h3><p>Programmatic validators and DAG replay check the act side; a cross-family critic model probes the abstain side.</p></div></li>
-      <li><span class="sn">04</span><div><h3>Human spot-check</h3><p>Three annotators rated a stratified 100-pair sample <b style="color:var(--ink);font-weight:600">96 / 94 / 98%</b> well-designed.</p></div></li>
-    </ol>
+    <p class="prose" style="margin:0 0 30px">Writing tasks by hand doesn’t scale, and a fixed benchmark eventually leaks into training data. AbstainGen synthesizes all 42 environments and 263 pairs end to end. The seeds are grounded in real agentic tasks from eight upstream benchmarks, but everything downstream is generated: seeds are augmented and recomposed, environments are designed and coded around them, and fresh instances can be produced whenever we need them.</p>
+    <div class="pwrap" role="figure" aria-label="AbstainGen pipeline: environment scaling then task pair generation, gated by validation at every step">
+      <div class="chart-top" style="margin-bottom:2px">
+        <div class="ct-t">AbstainGen, end to end<span class="ct-s">hover any step for detail</span></div>
+        <div class="legend">
+          <span class="lg"><i style="background:#fff;border:1px solid var(--rule);border-radius:0"></i>generation step</span>
+          <span class="lg"><i style="background:#fff;border:1px dashed var(--rule);border-radius:0"></i>validation gate</span>
+          <span class="lg"><i style="background:var(--abstain-soft);border:1px solid var(--abstain);border-radius:0"></i>artifact</span>
+        </div>
+      </div>
+
+      <div class="pjoin" style="--i:0"><span class="pl-tag">Layer 1 · run once · environment scaling</span></div>
+      <div class="prow">
+        <div class="pn io" style="--i:1" data-tip="Raw seed instructions are sampled from eight upstream agent benchmarks, then filtered and rewritten. The seeds ground every generated task in a realistic agentic workload."><b>Seed instructions</b><small>from 8 agent benchmarks</small></div>
+        <span class="pa" style="--i:2">&rarr;</span>
+        <div class="pn" style="--i:3" data-tip="Each seed is expanded into several augmented variants, so coverage goes well beyond the original benchmark phrasing. A cross-family critic validates every rewrite."><b>Augment seeds</b><small>vary intent and phrasing</small></div>
+        <span class="pa" style="--i:4">&rarr;</span>
+        <div class="pn" style="--i:5" data-tip="Augmented seeds are clustered by the capabilities they need, and greedy set cover routes each seed to the smallest set of environments that covers it."><b>Cluster and route</b><small>greedy set cover</small></div>
+        <span class="pa" style="--i:6">&rarr;</span>
+        <div class="pn" style="--i:7" data-tip="For every environment the pipeline designs tool signatures and a JSON state schema, fully resolved before any code is written."><b>Synthesize schemas</b><small>tools and state</small></div>
+        <span class="pa" style="--i:8">&rarr;</span>
+        <div class="pn" style="--i:9" data-tip="A per-environment coding agent implements the tools. An environment enters the catalog only after import, per-tool callability, and state round-trip checks all pass."><b>Generate code</b><small>admitted only after checks</small><small class="fail">fail: regenerate</small></div>
+        <span class="pa" style="--i:10">&rarr;</span>
+        <div class="pn art" style="--i:11" data-tip="The published catalog: 42 MCP sandbox environments exposing 541 tools, fully LLM-generated with no human-in-the-loop curation."><b>42 environments</b><small>541 tools, fully generated</small></div>
+      </div>
+
+      <div class="pjoin" style="--i:12"><span class="dn">&darr;</span> each augmented seed, with its routed environments <span class="dn">&darr;</span> <span class="pl-tag" style="margin-left:auto">Layer 2 · per pair · task generation</span></div>
+      <div class="prow">
+        <div class="pn" style="--i:13" data-tip="Stage 1 writes the should-act task: user instruction, system prompt, and the execution DAG, grounded in the resolved tool schemas and example state."><b>Generate act task T<sup>+</sup></b><small>instruction, prompt, DAG</small></div>
+        <span class="pa" style="--i:14">&rarr;</span>
+        <div class="pn gate" style="--i:15" data-tip="The act DAG is executed against the live environment; a pair whose act side does not run end to end is rejected and regenerated."><b>Replay in sandbox</b><small>act side must run</small><small class="fail">fail: regenerate</small></div>
+        <span class="pa" style="--i:16">&rarr;</span>
+        <div class="pn" style="--i:17" data-tip="Stage 2 applies the category-specific minimal perturbation to exactly one of the query, the environment state, or the tool set, producing the should-abstain twin plus a trigger record."><b>Apply minimal &delta;</b><small>one change to q, e, or &tau;</small></div>
+        <span class="pa" style="--i:18">&rarr;</span>
+        <div class="pn gate" style="--i:19" data-tip="A cross-family falsification critic actively hunts for counterexamples to the abstain claim, on top of programmatic validators and an LLM rubric judge at every stage."><b>Falsification critic</b><small>tries to break the claim</small><small class="fail">fail: regenerate</small></div>
+        <span class="pa" style="--i:20">&rarr;</span>
+        <div class="pn art" style="--i:21" data-tip="The released benchmark: 263 matched pairs. Three annotators rated a stratified 100-pair sample well-designed at 96, 94, and 98 percent."><b>263 validated pairs</b><small>spot-checked 96 / 94 / 98%</small></div>
+      </div>
+
+      <div class="pnote">Every stage runs a cross-family actor-critic loop: a GPT-family model proposes, a Claude-family model validates, and failures regenerate within a bounded retry budget. What survives the gates is the benchmark.</div>
+    </div>
   </section>
 
   <section class="sec" id="leaderboard">
@@ -703,7 +751,7 @@
 
     <div class="callout">
       <div class="cl">Signature failure: post-hoc abstention</div>
-      <p class="pq">Told to cancel a flight and rebook a window seat, models cancel the booking <em>first</em>, find no window seat is available, and report back, leaving the user with no flight at all.</p>
+      <p class="pq">Told to cancel a flight and rebook a window seat, a calibrated agent would check the rebooking before touching the reservation; the conflict was already sitting in the environment. Seven models canceled first and abstained <em>only then</em>: they flagged the contradiction and asked what to do once the cancellation could no longer be undone, leaving the user with no flight at all.</p>
     </div>
   </section>
 
@@ -713,9 +761,7 @@
       <button id="copy" type="button" class="copy">Copy</button>
       <pre id="bib">@misc{liu2026agentabstain,
   title  = {AgentAbstain: Do LLM Agents Know When Not to Act?},
-  author = {Liu, Xun and Zhang, Yi Evie and Kasprova, Vira and Rabbani, Parisa
-            and Zahraei, Pardis Sadat and Zhang, Tianyu
-            and Ebrahimpour-Boroojeny, Ali and Chandrasekaran, Varun},
+  author = {Liu, Xun and Zhang, Yi Evie and Kasprova, Vira and Rabbani, Parisa and Zahraei, Pardis Sadat and Zhang, Tianyu and Ebrahimpour-Boroojeny, Ali and Chandrasekaran, Varun},
   year   = {2026},
   eprint = {XXXX.XXXXX},
   archivePrefix = {arXiv},
@@ -791,7 +837,7 @@
     tt.classList.add('on');
   }
   function ttHide(){ clearTimeout(ttTimer); tt.classList.remove('on'); }
-  [].forEach.call(document.querySelectorAll('.lbtable .hlabel[data-tip], .pt[data-tip]'), function(lb){
+  [].forEach.call(document.querySelectorAll('.lbtable .hlabel[data-tip], .pt[data-tip], .pn[data-tip]'), function(lb){
     var th = lb.closest('th') || lb;
     th.addEventListener('pointerenter', function(e){
       if (e.pointerType === 'touch') return;
@@ -809,14 +855,14 @@
   var reduced = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || /[?&]static\b/.test(location.search);
   var chart = document.querySelector('.chart-wrap');
   if ('IntersectionObserver' in window && !reduced) {
-    var rvSel = '.hero .lead, .hero-crest, .reslist .btn, .byline, figure, .stat, .lede, .abs-grid .prose, .sec>h2, .pair>*, #benchmark h3, #benchmark .prose, .matrix, .grp, .tax, .steps li, .find3>div, .fpanel, .callout, .lb-note, .chart-wrap, .lbwrap, .citebox';
+    var rvSel = '.hero .lead, .hero-crest, .reslist .btn, .byline, figure, .stat, .lede, .abs-grid .prose, .sec>h2, .pair>*, #benchmark h3, #benchmark .prose, .matrix, .grp, .tax, .pwrap, .find3>div, .fpanel, .callout, .lb-note, .chart-wrap, .lbwrap, .citebox';
     var rvEls = [].slice.call(document.querySelectorAll(rvSel));
     rvEls.forEach(function(el){ el.classList.add('rv'); });
     var seen = new IntersectionObserver(function(es){
       es.forEach(function(e){
         if (!e.isIntersecting) return;
         e.target.classList.add('rv-in');
-        if (e.target.classList.contains('chart-wrap') || e.target.classList.contains('fpanel')) e.target.classList.add('in');
+        if (e.target.classList.contains('chart-wrap') || e.target.classList.contains('fpanel') || e.target.classList.contains('pwrap')) e.target.classList.add('in');
         if (e.target.id === 'lbtable') e.target.classList.add('lb-in');
         if (e.target.classList.contains('stats')) countStats(e.target);
         seen.unobserve(e.target);
@@ -827,7 +873,7 @@
     seen.observe(document.querySelector('.stats'));
   } else {
     if (chart) chart.classList.add('in');
-    [].forEach.call(document.querySelectorAll('.fpanel'), function(p){ p.classList.add('in'); });
+    [].forEach.call(document.querySelectorAll('.fpanel, .pwrap'), function(p){ p.classList.add('in'); });
     var lbt = document.getElementById('lbtable');
     if (lbt) lbt.classList.add('lb-in');
   }
