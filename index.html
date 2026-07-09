@@ -128,18 +128,18 @@
   .affil{margin:5px 0 0;font-size:13.5px;color:var(--muted)}
   .note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
 
-  /* figure */
-  figure{margin:clamp(40px,5vw,60px) 0 0}
-  .plate{background:#fff;border:1px solid var(--rule);padding:clamp(20px,3vw,36px);display:flex;justify-content:center}
-  .plate img{width:100%;max-width:660px;height:auto;display:block}
-  figcaption{margin-top:14px;display:grid;grid-template-columns:minmax(0,80px) minmax(0,1fr);gap:16px;max-width:80ch;font-size:14px;line-height:1.6;color:var(--muted)}
-  figcaption .fl{font-family:var(--display);font-size:13px;font-weight:600;color:var(--ink)}
-
   /* stats */
-  .stats{margin:clamp(16px,2.5vw,26px) 0 0;border-top:2px solid var(--rule);border-bottom:1px solid var(--rule);display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+  .stats{margin:clamp(16px,2.5vw,26px) 0 0;border-top:2px solid var(--rule);border-bottom:1px solid var(--rule);display:grid;grid-template-columns:repeat(6,1fr)}
   .stat{padding:24px 16px;border-right:1px solid var(--hair)}
   .stat:first-child{padding-left:0}
   .stat:last-child{border-right:0;padding-right:0}
+  @media (max-width:900px){
+    .stats{grid-template-columns:repeat(3,1fr)}
+    .stat{padding:20px 14px}
+    .stat:nth-child(3n+1){padding-left:0}
+    .stat:nth-child(3n){border-right:0;padding-right:0}
+    .stat:nth-child(-n+3){border-bottom:1px solid var(--hair)}
+  }
   .stat .n{font-family:var(--display);font-size:clamp(34px,4vw,48px);font-weight:500;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums}
   .stat.key .n{color:var(--abstain)}
   .stat .l{font-size:12px;color:var(--muted);margin-top:8px}
@@ -179,7 +179,7 @@
   .delta .sym::after{content:'';position:absolute;right:-1px;top:-4px;border-left:9px solid var(--abstain);border-top:5px solid transparent;border-bottom:5px solid transparent}
 
   /* scoring matrix */
-  .matrix{display:grid;grid-template-columns:clamp(54px,13%,140px) minmax(0,1fr) minmax(0,1fr);border:1px solid var(--rule);margin-top:8px}
+  .matrix{display:grid;grid-template-columns:clamp(88px,13%,140px) minmax(0,1fr) minmax(0,1fr);border:1px solid var(--rule);margin-top:8px}
   .matrix .ch{font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:0.02em;color:var(--muted);text-align:center;padding:12px;border-bottom:1px solid var(--hair);border-left:1px solid var(--hair)}
   .matrix .rh{display:flex;align-items:center;justify-content:flex-end;font-family:var(--display);font-size:11px;font-weight:600;color:var(--muted);padding:16px 12px}
   .matrix .cell{padding:18px;border-left:1px solid var(--hair)}
@@ -361,6 +361,8 @@
   .echips.open .emore{display:none}
   .emore{font-family:var(--text);font-size:11px;line-height:1;padding:5px 9px;background:none;border:1px dashed var(--hair);border-radius:2px;color:var(--muted);cursor:pointer;white-space:nowrap}
   .emore:hover{border-color:var(--ink);color:var(--ink)}
+  .taphint{display:none}
+  @media (hover:none){.hoverhint{display:none}.taphint{display:inline}}
   .echip{font-size:11px;line-height:1;padding:5px 9px;border:1px solid var(--hair);background:#fff;border-radius:2px;white-space:nowrap;cursor:default}
   .echip:hover{border-color:var(--ink)}
   .echip small{color:var(--muted);font-family:var(--mono);font-size:9.5px;margin-left:5px}
@@ -454,9 +456,9 @@
     .sec{scroll-margin-top:132px}
   }
   @media (max-width:560px){
-    .matrix{grid-template-columns:40px minmax(0,1fr) minmax(0,1fr)}
+    .matrix{grid-template-columns:26px minmax(0,1fr) minmax(0,1fr)}
     .matrix .cell{padding:12px 10px}
-    .matrix .rh{padding:12px 6px;font-size:10px}
+    .matrix .rh{padding:10px 4px;font-size:10px;justify-content:center;writing-mode:vertical-rl;rotate:180deg}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -667,7 +669,7 @@
       </div>
 
       <div class="estrip">
-      <div class="dlbl" style="margin-top:0">The 42 environments<span style="font-family:var(--text);font-weight:400;color:var(--muted)"> · each chip is one sandbox, the number is how many tools it exposes · hover for the mix</span></div>
+      <div class="dlbl" style="margin-top:0">The 42 environments<span style="font-family:var(--text);font-weight:400;color:var(--muted)"> · each chip is one sandbox, the number is how many tools it exposes<span class="hoverhint"> · hover for the mix</span><span class="taphint"> · tap a chip for the mix</span></span></div>
       <div class="echips">
         <span class="echip" data-tip="Retail Orders · 29 tools: 9 read, 4 search, 4 verify, 10 write, 2 delete">Retail Orders<small>29</small></span>
         <span class="echip" data-tip="Email · 26 tools: 8 read, 5 search, 4 verify, 9 write">Email<small>26</small></span>
@@ -723,7 +725,7 @@
     <p class="prose" style="margin:0 0 30px">Writing tasks by hand doesn’t scale, and a fixed benchmark eventually leaks into training data. AbstainGen, the framework’s second component, synthesizes all 42 environments and 263 pairs end to end. The seeds are grounded in real agentic tasks from eight upstream benchmarks, but everything downstream is generated: seeds are augmented and recomposed, environments are designed and coded around them, and fresh instances can be produced whenever we need them. The quality holds up under human eyes: three annotators independently rated a stratified sample of 100 pairs, and each judged between 94% and 98% of it well-designed.</p>
     <div class="pwrap" role="figure" aria-label="AbstainGen pipeline: environment scaling then task pair generation, gated by validation at every step">
       <div class="chart-top" style="margin-bottom:2px">
-        <div class="ct-t">Inside AbstainGen<span class="ct-s">hover any step for detail</span></div>
+        <div class="ct-t">Inside AbstainGen<span class="ct-s hoverhint">hover any step for detail</span><span class="ct-s taphint">tap any step for detail</span></div>
         <div class="legend">
           <span class="lg"><i style="background:#fff;border:1px solid var(--rule);border-radius:0"></i>generation step</span>
           <span class="lg"><i style="background:#fff;border:1px dashed var(--rule);border-radius:0"></i>validation gate</span>
@@ -993,7 +995,7 @@
           </div>
         </div>
       </div>
-      <div class="fnote">Models ordered by total failure share, the sum of the three modes; the rest of each column is successful abstention, and hovering a column shows all four shares. Across models the three modes average 17.8%, 19.7%, and 2.6% of abstain runs. Post-hoc is the rare dark sliver at the top, and the most dangerous: the agent acts irreversibly, then claims restraint. Profiles differ sharply; Kimi K2.5 stalls silently on 37.6% of its abstain runs, while GPT-5.1 leads on post-hoc.</div>
+      <div class="fnote">Models ordered by total failure share, the sum of the three modes; the rest of each column is successful abstention<span class="hoverhint">, and hovering a column shows all four shares</span><span class="taphint">, and tapping a column shows all four shares</span>. Across models the three modes average 17.8%, 19.7%, and 2.6% of abstain runs. Post-hoc is the rare dark sliver at the top, and the most dangerous: the agent acts irreversibly, then claims restraint. Profiles differ sharply; Kimi K2.5 stalls silently on 37.6% of its abstain runs, while GPT-5.1 leads on post-hoc.</div>
     </div>
   </section>
 
@@ -1069,7 +1071,7 @@
   tt.className = 'tt';
   tt.setAttribute('role', 'tooltip');
   document.body.appendChild(tt);
-  var ttTimer;
+  var ttTimer, ttAnchor = null;
   function ttShow(anchor){
     tt.textContent = anchor.getAttribute('data-tip');
     var r = anchor.getBoundingClientRect(), w = tt.offsetWidth;
@@ -1077,8 +1079,13 @@
     tt.style.left = (x + window.scrollX) + 'px';
     tt.style.top = (r.bottom + window.scrollY + 10) + 'px';
     tt.classList.add('on');
+    ttAnchor = anchor;
   }
-  function ttHide(){ clearTimeout(ttTimer); tt.classList.remove('on'); }
+  function ttHide(){ clearTimeout(ttTimer); tt.classList.remove('on'); ttAnchor = null; }
+  // touch convention: a tap toggles the tip, a tap anywhere else dismisses it
+  document.addEventListener('pointerdown', function(e){
+    if (ttAnchor && !ttAnchor.contains(e.target)) ttHide();
+  });
   var more = document.querySelector('.emore');
   if (more) more.addEventListener('click', function(){ more.closest('.echips').classList.add('open'); });
   [].forEach.call(document.querySelectorAll('.lbtable .hlabel[data-tip], .pt[data-tip], .pn[data-tip], .fmcol[data-tip], .dbar span[data-tip], .echip[data-tip], .lg-ceil[data-tip], .gl.ceil[data-tip]'), function(lb){
@@ -1088,10 +1095,16 @@
       clearTimeout(ttTimer);
       ttTimer = setTimeout(function(){ ttShow(lb); }, 350);
     });
-    th.addEventListener('pointerleave', ttHide);
+    // a lifted finger fires pointerleave too; only a mouse or pen leaving should hide
+    th.addEventListener('pointerleave', function(e){ if (e.pointerType === 'touch') return; ttHide(); });
     th.addEventListener('focus', function(){ clearTimeout(ttTimer); ttTimer = setTimeout(function(){ ttShow(lb); }, 350); });
     th.addEventListener('blur', ttHide);
-    th.addEventListener('click', ttHide);
+    if (lb.closest('.lbtable')) th.addEventListener('click', ttHide);
+    else th.addEventListener('pointerup', function(e){
+      if (e.pointerType !== 'touch') return;
+      if (ttAnchor === lb) ttHide();
+      else { clearTimeout(ttTimer); ttShow(lb); }
+    });
   });
 
   // Motion: scroll reveals, stat count-up, chart/table bar growth.
