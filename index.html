@@ -39,14 +39,14 @@
       "description": "The first systematic evaluation framework for agentic abstention: whether tool-using LLM agents recognize when not to act. AgentAbstain is the benchmark, 263 paired tasks across 42 executable sandbox environments built on an agent-native taxonomy of eight abstention scenarios; AbstainGen is the pipeline that generates the environments and task pairs end to end. Across 17 frontier LLMs the best model reaches 59.5% paired accuracy, and abstention ability is largely independent of task-solving ability.",
       "keywords": "agentic abstention, LLM agents, AI agent benchmark, abstention, refusal, clarification, tool use, AI safety, evaluation framework, when not to act",
       "author": [
-        {"@type": "Person", "name": "Xun Liu"},
-        {"@type": "Person", "name": "Yi Evie Zhang"},
-        {"@type": "Person", "name": "Vira Kasprova"},
-        {"@type": "Person", "name": "Parisa Rabbani"},
-        {"@type": "Person", "name": "Pardis Sadat Zahraei"},
-        {"@type": "Person", "name": "Tianyu Zhang"},
-        {"@type": "Person", "name": "Ali Ebrahimpour-Boroojeny"},
-        {"@type": "Person", "name": "Varun Chandrasekaran"}
+        {"@type": "Person", "name": "Xun Liu", "url": "https://antiquality.github.io/"},
+        {"@type": "Person", "name": "Yi Evie Zhang", "url": "https://www.linkedin.com/in/yi-zhang-uc/"},
+        {"@type": "Person", "name": "Vira Kasprova", "url": "https://www.linkedin.com/in/vira-kasprova/"},
+        {"@type": "Person", "name": "Parisa Rabbani", "url": "https://ladypary.github.io/"},
+        {"@type": "Person", "name": "Pardis Sadat Zahraei", "url": "https://pardissz.github.io/"},
+        {"@type": "Person", "name": "Tianyu Zhang", "url": "https://tnyuzg.github.io/"},
+        {"@type": "Person", "name": "Ali Ebrahimpour-Boroojeny", "url": "https://ali-e.github.io/"},
+        {"@type": "Person", "name": "Varun Chandrasekaran", "url": "https://chandrasekaran-group.github.io/"}
       ],
       "sourceOrganization": {"@type": "Organization", "name": "University of Illinois Urbana-Champaign"},
       "isPartOf": {"@id": "https://agentabstain.github.io/#website"}
@@ -123,6 +123,8 @@
   .byline sup{color:var(--muted)}
   .authors{margin:0;font-size:15.5px;line-height:1.7}
   .authors span{white-space:nowrap}
+  .authors a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--ink) 24%,transparent);transition:text-decoration-color .15s ease}
+  .authors a:hover{text-decoration-color:var(--abstain)}
   .affil{margin:5px 0 0;font-size:13.5px;color:var(--muted)}
   .note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
 
@@ -505,7 +507,7 @@
       </div>
     </div>
     <div class="byline">
-      <p class="authors"><span>Xun Liu<sup>&dagger;</sup></span>, <span>Yi Evie Zhang<sup>&dagger;</sup></span>, <span>Vira Kasprova<sup>&lowast;</sup></span>, <span>Parisa Rabbani<sup>&lowast;</sup></span>, <span>Pardis Sadat Zahraei<sup>&lowast;</sup></span>, <span>Tianyu Zhang<sup>&lowast;</sup></span>, <span>Ali Ebrahimpour-Boroojeny</span>, <span>Varun Chandrasekaran</span></p>
+      <p class="authors"><span><a href="https://antiquality.github.io/" target="_blank" rel="noopener">Xun Liu</a><sup>&dagger;</sup></span>, <span><a href="https://www.linkedin.com/in/yi-zhang-uc/" target="_blank" rel="noopener">Yi Evie Zhang</a><sup>&dagger;</sup></span>, <span><a href="https://www.linkedin.com/in/vira-kasprova/" target="_blank" rel="noopener">Vira Kasprova</a><sup>&lowast;</sup></span>, <span><a href="https://ladypary.github.io/" target="_blank" rel="noopener">Parisa Rabbani</a><sup>&lowast;</sup></span>, <span><a href="https://pardissz.github.io/" target="_blank" rel="noopener">Pardis Sadat Zahraei</a><sup>&lowast;</sup></span>, <span><a href="https://tnyuzg.github.io/" target="_blank" rel="noopener">Tianyu Zhang</a><sup>&lowast;</sup></span>, <span><a href="https://ali-e.github.io/" target="_blank" rel="noopener">Ali Ebrahimpour-Boroojeny</a></span>, <span><a href="https://chandrasekaran-group.github.io/" target="_blank" rel="noopener">Varun Chandrasekaran</a></span></p>
       <p class="affil">University of Illinois Urbana-Champaign</p>
       <p class="note"><sup>&dagger;</sup> Project lead &middot; <sup>&lowast;</sup> Equal contribution, listed alphabetically &middot; Correspondence: <a href="mailto:xunliu@illinois.edu">xunliu@illinois.edu</a>, <a href="mailto:varunc@illinois.edu">varunc@illinois.edu</a></p>
     </div>
