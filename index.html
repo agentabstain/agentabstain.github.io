@@ -519,7 +519,7 @@
     <div class="abs-grid">
     <p class="lede">Most agent benchmarks reward getting the task <em>done</em>. We test the opposite skill: knowing when to <span class="stop">stop</span>.</p>
     <div class="prose">
-      <p>When a request is vague, self-contradictory, or impossible with the tools on hand, an agent that plows ahead can do real and irreversible damage. We present the first systematic evaluation framework for agentic abstention: the ability of a tool-using agent to recognize when not to act, whether the trigger is visible up front or only surfaces mid-execution.</p>
+      <p>When a request is vague, self-contradictory, or impossible with the tools on hand, an agent that plows ahead can do real and irreversible damage. We present the first systematic evaluation framework for agentic abstention: the calibrated ability of a tool-using agent to recognize when not to act, whether the trigger is visible up front or only surfaces mid-execution.</p>
       <p>The framework has two components. <b style="font-weight:600">AgentAbstain</b> is the benchmark: 263 paired tasks in 42 executable environments, built on an agent-native taxonomy of eight abstention scenarios, where every task ships with a twin that differs by one small detail. <b style="font-weight:600">AbstainGen</b> is the pipeline that keeps it fresh: it generates the environments and pairs end to end, validated by replay and by cross-family critics; three annotators independently rated a stratified 100-pair sample between 94% and 98% sound. Across 17 frontier models the best reaches <b style="font-weight:600">59.5% paired accuracy</b>, and being good at the task tells you little about whether a model knows when to stop.</p>
     </div>
     </div>
@@ -864,7 +864,7 @@
       <div>
         <div class="big">−.25</div>
         <div class="ft">Capability isn’t restraint</div>
-        <p>The act-abstain tradeoff is significant (Pearson r = −.25, p &lt; 0.01): stronger models aren’t reliably more cautious.</p>
+        <p>Across all 136 model &times; scenario cells the act-abstain tradeoff is significant (Pearson r = −.25, p &lt; 0.01): stronger models aren’t reliably more cautious.</p>
       </div>
     </div>
     <div class="fig2">
