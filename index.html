@@ -515,7 +515,10 @@
     .delta{flex-direction:row;min-width:0;gap:12px}
     .delta .sym{width:2px;height:38px;animation-name:nudgeY}
     .delta .sym::after{right:auto;top:auto;bottom:-1px;left:-4px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:9px solid var(--abstain);border-bottom:0}
-    .nav{gap:4px 14px}
+    /* phones: one swipeable nav row that follows the section in view */
+    .nav{width:100%;flex-wrap:nowrap;overflow-x:auto;gap:0 18px;position:relative;padding-right:28px;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)}
+    .nav::-webkit-scrollbar{display:none}
+    .nav a{flex:none;white-space:nowrap}
     .fig2{grid-template-columns:1fr}
     .dgrid{grid-template-columns:1fr}
     .prow{flex-direction:column}
@@ -523,7 +526,7 @@
     .prow .pa.loop{flex-direction:row;gap:7px;padding:1px 0}
     .prow .pa.loop>span:first-child,.prow .pa.loop>.bk2{transform:rotate(90deg);display:inline-block}
     .pjoin{flex-wrap:wrap}
-    .sec{scroll-margin-top:132px}
+    .sec{scroll-margin-top:100px}
   }
   @media (max-width:560px){
     .matrix{grid-template-columns:26px minmax(0,1fr) minmax(0,1fr)}
@@ -582,7 +585,7 @@
     <div class="byline">
       <p class="authors"><span><a href="https://antiquality.github.io/" target="_blank" rel="noopener">Xun Liu</a><sup>&dagger;</sup></span>, <span><a href="https://yieviezhang.github.io/" target="_blank" rel="noopener">Yi Evie Zhang</a><sup>&dagger;</sup></span>, <span><a href="https://www.linkedin.com/in/vira-kasprova/" target="_blank" rel="noopener">Vira Kasprova</a><sup>&lowast;</sup></span>, <span><a href="https://ladypary.github.io/" target="_blank" rel="noopener">Parisa Rabbani</a><sup>&lowast;</sup></span>, <span><a href="https://pardissz.github.io/" target="_blank" rel="noopener">Pardis Sadat Zahraei</a><sup>&lowast;</sup></span>, <span><a href="https://tnyuzg.github.io/" target="_blank" rel="noopener">Tianyu Zhang</a><sup>&lowast;</sup></span>, <span><a href="https://ali-e.github.io/" target="_blank" rel="noopener">Ali Ebrahimpour-Boroojeny</a></span>, <span><a href="https://chandrasekaran-group.github.io/" target="_blank" rel="noopener">Varun Chandrasekaran</a></span></p>
       <p class="affil">University of Illinois Urbana-Champaign</p>
-      <p class="note"><sup>&dagger;</sup> Project lead &middot; <sup>&lowast;</sup> Equal contribution, listed alphabetically &middot; Correspondence: <a href="mailto:xunliu@illinois.edu">xunliu@illinois.edu</a>, <a href="mailto:varunc@illinois.edu">varunc@illinois.edu</a></p>
+      <p class="note"><sup>&dagger;</sup> Project lead. <sup>&lowast;</sup> Equal contribution, listed alphabetically. Correspondence: <a href="mailto:xunliu@illinois.edu">xunliu@illinois.edu</a>, <a href="mailto:varunc@illinois.edu">varunc@illinois.edu</a></p>
     </div>
   </section>
 
@@ -740,7 +743,7 @@
       </div>
 
       <div class="estrip">
-      <div class="dlbl" style="margin-top:0">The 42 environments<span style="font-family:var(--text);font-weight:400;color:var(--muted)"> · each chip is one sandbox, the number is how many tools it exposes<span class="hoverhint"> · hover for the mix</span><span class="taphint"> · tap a chip for the mix</span></span></div>
+      <div class="dlbl" style="margin-top:0">The 42 environments<span style="font-family:var(--text);font-weight:400;color:var(--muted);margin-left:10px">Each chip is one sandbox; the number is how many tools it exposes.<span class="hoverhint"> Hover for the mix.</span><span class="taphint"> Tap a chip for the mix.</span></span></div>
       <div class="echips">
         <span class="echip" data-tip="Retail Orders · 29 tools: 9 read, 4 search, 4 verify, 10 write, 2 delete">Retail Orders<small>29</small></span>
         <span class="echip" data-tip="Email · 26 tools: 8 read, 5 search, 4 verify, 9 write">Email<small>26</small></span>
@@ -1025,7 +1028,7 @@
     </div>
 
     <div class="callout">
-      <div class="cl">Signature failure: accidental safety &middot; <a href="#case4">see Case 4</a></div>
+      <div class="cl">Signature failure: accidental safety. <a href="#case4">See Case 4.</a></div>
       <p class="pq">&ldquo;Send a $5,000,000 bank transfer &hellip; for the tax-filing report due tomorrow.&rdquo; The account held $4,825.33. Three of seventeen models read that balance, then fired the wire anyway; what stopped the money was <em>an insufficient-funds error, not the agent</em>.</p>
     </div>
 
@@ -1333,7 +1336,7 @@
 
   <footer>
     <div class="fb"><img src="assets/logo-96.png" alt="" width="21" height="21">AgentAbstain</div>
-    <div class="fl">University of Illinois Urbana-Champaign · NeurIPS 2026 Oral</div>
+    <div class="fl"><span style="display:inline-block;margin-right:14px">University of Illinois Urbana-Champaign</span><span style="display:inline-block">NeurIPS 2026 Oral</span></div>
     <div class="fr">
       <a href="https://arxiv.org/abs/2607.10059" target="_blank" rel="noopener">Paper</a>
       <a href="https://github.com/AntiQuality/agentabstain" target="_blank" rel="noopener">Code</a>
@@ -1474,7 +1477,16 @@
       es.forEach(function(e){
         if (e.isIntersecting){
           for (var k in links) links[k].classList.remove('active');
-          if (links[e.target.id]) links[e.target.id].classList.add('active');
+          var a = links[e.target.id];
+          if (a) {
+            a.classList.add('active');
+            // on phones the nav is one scrollable row: bring the active link into view
+            var nav = a.parentNode;
+            if (nav.scrollWidth > nav.clientWidth) {
+              var x = a.offsetLeft - (nav.clientWidth - a.offsetWidth) / 2;
+              nav.scrollTo({ left: Math.max(0, x), behavior: reduced ? 'auto' : 'smooth' });
+            }
+          }
         }
       });
     }, { rootMargin:'-45% 0px -50% 0px' });
