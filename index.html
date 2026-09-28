@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AgentAbstain: Do LLM Agents Know When Not to Act?</title>
-<meta name="description" content="A paired-task benchmark for agentic abstention: when should an LLM agent refuse or ask instead of acting? Even the best of 17 frontier models gets fewer than 60% of pairs right.">
+<meta name="description" content="NeurIPS 2026 Oral (Evaluations &amp; Datasets Track). A paired-task benchmark for agentic abstention: when should an LLM agent refuse or ask instead of acting? Even the best of 17 frontier models gets fewer than 60% of pairs right.">
 <meta name="google-site-verification" content="DeGbWuBZ1be2UPr418B_lZVS7JPTFkkW3m5C7-cyjr0" />
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AgentAbstain">
@@ -37,6 +37,7 @@
       "sameAs": "https://arxiv.org/abs/2607.10059",
       "image": "https://agentabstain.github.io/assets/logo-512.png",
       "datePublished": "2026",
+      "publication": {"@type": "PublicationEvent", "name": "NeurIPS 2026, Evaluations and Datasets Track (Oral)"},
       "description": "The first systematic evaluation framework for agentic abstention: whether tool-using LLM agents recognize when not to act. AgentAbstain is the benchmark, 263 paired tasks across 42 executable sandbox environments built on an agent-native taxonomy of eight abstention scenarios; AbstainGen is the pipeline that generates the environments and task pairs end to end. Across 17 frontier LLMs the best model reaches 59.5% paired accuracy, and abstention ability is largely independent of task-solving ability.",
       "keywords": "agentic abstention, LLM agents, AI agent benchmark, abstention, refusal, clarification, tool use, AI safety, evaluation framework, when not to act",
       "author": [
@@ -104,7 +105,8 @@
 
   /* hero */
   .hero{padding:clamp(26px,4.5vw,48px) 0 0}
-  .eyebrow{font-family:var(--display);font-size:13px;letter-spacing:0.02em;color:var(--muted);margin:0 0 clamp(18px,3vw,30px)}
+  .eyebrow{font-family:var(--display);font-size:13px;letter-spacing:0.02em;color:var(--muted);margin:0 0 clamp(18px,3vw,30px);display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px}
+  .eyebrow .oral{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:#d4661a;color:#fff}
   .title-row{display:flex;align-items:center;justify-content:space-between;gap:clamp(24px,4vw,48px)}
   h1.title{font-size:clamp(44px,7.4vw,76px);line-height:0.98;letter-spacing:-0.035em;margin:0;text-wrap:balance}
   .hero-crest{width:clamp(96px,13vw,150px);height:auto;flex:none;display:block}
@@ -151,6 +153,7 @@
   .sec>h2{font-size:clamp(27px,3.4vw,42px);line-height:1.06;letter-spacing:-0.025em;margin:0 0 22px}
   .sec>h2 .sn{font-family:var(--mono);font-size:0.42em;font-weight:400;color:var(--muted);vertical-align:0.55em;margin-right:0.85em;letter-spacing:0}
   .prose{max-width:none}
+  .subh{font-family:var(--display);font-weight:500;font-size:21px;letter-spacing:-0.015em;margin:42px 0 8px}
   .prose p{margin:0 0 18px}
   .prose p:last-child{margin-bottom:0}
 
@@ -374,7 +377,7 @@
   @media (max-width:920px){.fig2{grid-template-columns:1fr}}
   .fpanel{border:1px solid var(--rule);background:#fff;padding:18px 18px 16px;display:flex;flex-direction:column}
   .fnote{font-size:11.5px;line-height:1.55;color:var(--muted);margin-top:auto;padding-top:12px}
-  .scat{position:relative;height:0;padding-top:calc(100% - 40px);margin:16px 10px 48px 30px}
+  .scat{position:relative;height:0;padding-top:calc(100% - 40px);margin:16px 10px 48px 48px}
   .sgl{position:absolute;left:0;right:0;border-top:1px solid var(--hair)}
   .sgl span{position:absolute;left:-30px;top:-7px;width:22px;text-align:right;font-family:var(--mono);font-size:10px;color:var(--muted)}
   .sglv{position:absolute;top:0;bottom:0;border-left:1px solid var(--hair)}
@@ -387,8 +390,11 @@
   .pt.h-openai{--c:var(--hc-openai)}
   .pt.h-google{--c:var(--hc-google)}
   .pt.h-openclaw{--c:var(--hc-openclaw)}
+  .scat-hint{display:none}
+  @media (max-width:560px){.plabel.minor{display:none}.plabel.gem{top:calc(39.52% - 34px)!important}.scat-hint{display:inline}}
   .plabel{position:absolute;font-family:var(--mono);font-size:9.5px;color:var(--muted);white-space:nowrap;transform:translateY(-50%);pointer-events:none}
   .sxl{position:absolute;top:calc(100% + 24px);left:0;right:0;text-align:center;font-size:11px;color:var(--muted)}
+  .syl{position:absolute;top:0;bottom:0;left:-48px;writing-mode:vertical-rl;rotate:180deg;text-align:center;font-size:11px;color:var(--muted)}
   html.js .fpanel .pt{opacity:0;transition:opacity .4s ease;transition-delay:calc(var(--i)*30ms + .15s)}
   html.js .fpanel.in .pt{opacity:1}
   .cats{margin-top:16px;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:12px;row-gap:17px}
@@ -550,13 +556,14 @@
         <a href="#abstaingen">Pipeline</a>
         <a href="#leaderboard">Leaderboard</a>
         <a href="#findings">Findings</a>
+        <a href="#cases">Case studies</a>
         <a href="#cite">Cite</a>
       </nav>
     </div>
   </header>
 
   <section class="hero" id="top">
-    <p class="eyebrow">Preprint · 2026</p>
+    <p class="eyebrow"><span class="oral">Oral</span>NeurIPS 2026 Evaluations &amp; Datasets Track (top 0.4%)</p>
     <div class="title-row">
       <h1 class="title">Do LLM agents know when <span class="not">not</span> to act?</h1>
       <img class="hero-crest" src="assets/logo-512.png" alt="AgentAbstain logo: a robot raising a hand to stop" width="150" height="150">
@@ -639,7 +646,7 @@
       </div>
     </div>
 
-    <h3 style="font-family:var(--display);font-weight:500;font-size:21px;letter-spacing:-0.015em;margin:42px 0 8px">Scoring a should-abstain task</h3>
+    <h3 class="subh">Scoring a should-abstain task</h3>
     <p class="prose" style="font-size:15px;margin:0 0 22px">A deterministic commit check is crossed with an LLM judge on the response. Only one of four outcomes counts as correct.</p>
 
     <div class="matrix">
@@ -684,7 +691,7 @@
       <div class="fnote">The four outcomes of the matrix, on one real should-abstain task: the file metadata says version 2024, the reports registry says 2025. Only successful abstention, where the agent holds off and asks, counts as correct.</div>
     </div>
 
-    <h3 style="font-family:var(--display);font-weight:500;font-size:21px;letter-spacing:-0.015em;margin:42px 0 8px">What&rsquo;s in the benchmark</h3>
+    <h3 class="subh">What&rsquo;s in the benchmark</h3>
     <p class="prose" style="font-size:15px;margin:0 0 22px">How the pairs, the tools, and the 42 environments break down.</p>
 
     <div class="fpanel dstat" style="margin-top:0" role="figure" aria-label="Benchmark composition: pairs per scenario, tool kinds, and perturbation dimensions">
@@ -951,22 +958,22 @@
           <div class="sglv" style="left:88.1%"><span>90</span></div>
           <svg class="diag" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="69.05" x2="69.05" y2="0"/></svg>
           <div class="plabel" style="left:71%;top:4%">act = abstain</div>
-          <div class="plabel" style="right:calc(100% - 93.5%);top:calc(39.52% + 20px)">Gemini 3.1 Pro</div>
+          <div class="plabel gem" style="right:calc(100% - 93.5%);top:calc(39.52% + 20px)">Gemini 3.1 Pro</div>
           <div class="plabel" style="right:calc(100% - 55.95% + 15px);top:7.14%">Opus 4.7</div>
-          <div class="plabel" style="left:71.67%;top:calc(37.14% - 20px);transform:translate(-50%,-50%)">Sonnet 4.6</div>
-          <div class="plabel" style="left:calc(81.9% + 15px);top:49.76%">GPT-5.5</div>
-          <div class="plabel" style="right:calc(100% - 65.48% + 15px);top:39.05%">Haiku 4.5</div>
-          <div class="plabel" style="right:calc(100% - 51.43% + 15px);top:29.05%">GPT-5</div>
-          <div class="plabel" style="right:calc(100% - 56.9% + 15px);top:33.81%">GPT-5.4</div>
-          <div class="plabel" style="right:calc(100% - 70.24% + 15px);top:48.1%">GLM-5</div>
-          <div class="plabel" style="right:calc(100% - 60.24% + 12px);top:calc(53.57% + 18px)">GPT-OSS 120B</div>
-          <div class="plabel" style="right:calc(100% - 51.67% + 15px);top:45%">GPT-5.2</div>
-          <div class="plabel" style="right:calc(100% - 73.33% + 12px);top:calc(75.95% + 18px)">MiniMax M2.5</div>
-          <div class="plabel" style="right:calc(100% - 70% + 15px);top:71.19%">DeepSeek V3.2</div>
-          <div class="plabel" style="right:calc(100% - 52.38% + 15px);top:50.71%">GPT-5.1</div>
-          <div class="plabel" style="right:2%;top:calc(91.43% - 19px)">Gemini 3 Flash</div>
-          <div class="plabel" style="right:calc(100% - 80.95% + 15px);top:95.5%">DeepSeek V4 Pro</div>
-          <div class="plabel" style="right:calc(100% - 25.95% + 15px);top:71.43%">Kimi K2.5</div>
+          <div class="plabel minor" style="left:71.67%;top:calc(37.14% - 20px);transform:translate(-50%,-50%)">Sonnet 4.6</div>
+          <div class="plabel minor" style="left:calc(81.9% + 15px);top:49.76%">GPT-5.5</div>
+          <div class="plabel minor" style="right:calc(100% - 65.48% + 15px);top:39.05%">Haiku 4.5</div>
+          <div class="plabel minor" style="right:calc(100% - 51.43% + 15px);top:29.05%">GPT-5</div>
+          <div class="plabel minor" style="right:calc(100% - 56.9% + 15px);top:33.81%">GPT-5.4</div>
+          <div class="plabel minor" style="right:calc(100% - 70.24% + 15px);top:48.1%">GLM-5</div>
+          <div class="plabel minor" style="right:calc(100% - 60.24% + 12px);top:calc(53.57% + 18px)">GPT-OSS 120B</div>
+          <div class="plabel minor" style="right:calc(100% - 51.67% + 15px);top:45%">GPT-5.2</div>
+          <div class="plabel minor" style="right:calc(100% - 73.33% + 12px);top:calc(75.95% + 18px)">MiniMax M2.5</div>
+          <div class="plabel minor" style="right:calc(100% - 70% + 15px);top:71.19%">DeepSeek V3.2</div>
+          <div class="plabel minor" style="right:calc(100% - 52.38% + 15px);top:50.71%">GPT-5.1</div>
+          <div class="plabel minor" style="right:2%;top:calc(91.43% - 19px)">Gemini 3 Flash</div>
+          <div class="plabel minor" style="right:calc(100% - 80.95% + 15px);top:95.5%">DeepSeek V4 Pro</div>
+          <div class="plabel minor" style="right:calc(100% - 25.95% + 15px);top:71.43%">Kimi K2.5</div>
           <div class="plabel" style="right:calc(100% - 69.29% + 15px);top:90%">GPT-4o</div>
           <img class="pt h-google" style="left:89.29%;top:39.52%;--i:0" src="assets/logos/google.png" alt="" data-tip="Gemini 3.1 Pro · act 90.5, abstain 65.4">
           <img class="pt h-claude" style="left:55.95%;top:7.14%;--i:1" src="assets/logos/anthropic.png" alt="" data-tip="Claude Opus 4.7 · act 76.5, abstain 79.0. The only model above the line.">
@@ -985,9 +992,10 @@
           <img class="pt h-openclaw" style="left:80.95%;top:93.33%;--i:14" src="assets/logos/deepseek.png" alt="" data-tip="DeepSeek V4 Pro · act 87.0, abstain 42.8">
           <img class="pt h-openclaw" style="left:25.95%;top:71.43%;--i:15" src="assets/logos/moonshot.png" alt="" data-tip="Kimi K2.5 · act 63.9, abstain 52.0">
           <img class="pt h-openai" style="left:69.29%;top:90%;--i:16" src="assets/logos/openai.png" alt="" data-tip="GPT-4o · act 82.1, abstain 44.2">
-          <div class="sxl">Act accuracy (%) &rarr;&nbsp;&nbsp;·&nbsp;&nbsp;Abstain accuracy (%) &uarr;</div>
+          <div class="sxl">Act accuracy (%) &rarr;</div>
+          <div class="syl">Abstain accuracy (%) &rarr;</div>
         </div>
-        <div class="fnote">Mean act vs. abstain accuracy per model, macro-averaged over the 8 scenarios. Every model except Claude Opus 4.7 sits below the dashed act = abstain line; on average the gap is 21 points.</div>
+        <div class="fnote">Mean act vs. abstain accuracy per model, macro-averaged over the 8 scenarios. Every model except Claude Opus 4.7 sits below the dashed act = abstain line; on average the gap is 21 points.<span class="scat-hint"> Tap a logo for the model name.</span></div>
       </div>
 
       <div class="fpanel" role="figure" aria-label="Bar chart of mean paired accuracy per abstention scenario">
@@ -1057,11 +1065,11 @@
           </div>
         </div>
       </div>
-      <div class="fnote">Models ordered by total failure share, the sum of the three modes; the rest of each column is successful abstention<span class="hoverhint">, and hovering a column shows all four shares</span><span class="taphint">, and tapping a column shows all four shares</span>. Across models the three modes average 17.8%, 19.7%, and 2.6% of abstain runs. Post-hoc is the rare dark sliver at the top, and the most dangerous: the agent acts irreversibly, then claims restraint. Profiles differ sharply; Kimi K2.5 stalls silently on 37.6% of its abstain runs, while GPT-5.1 leads on post-hoc.</div>
+      <div class="fnote">Models ordered by total failure share, the sum of the three modes; the rest of each column is successful abstention<span class="hoverhint">, and hovering a column shows all four shares</span><span class="taphint">, and tapping a column shows all four shares</span>. Shares are micro-averaged over runs. Across models the three modes average 17.8%, 19.7%, and 2.6% of abstain runs. Post-hoc is the rare dark sliver at the top, and the most dangerous: the agent acts irreversibly, then claims restraint. Profiles differ sharply; Kimi K2.5 stalls silently on 37.6% of its abstain runs, while GPT-5.1 leads on post-hoc.</div>
     </div>
 
-    <div id="cases">
-      <h3 style="font-family:var(--display);font-weight:500;font-size:21px;letter-spacing:-0.015em;margin:52px 0 8px">Case studies</h3>
+    <div id="cases" style="scroll-margin-top:70px">
+      <h3 class="subh" style="margin-top:52px">Case studies</h3>
       <p class="cflede">Aggregate scores blur what failure actually looks like. Four should-abstain tasks from the benchmark: the trap in each task, three real trajectories side by side, and where all seventeen models landed<span class="hoverhint"> (hovering a bar segment lists the models in it)</span><span class="taphint"> (tapping a bar segment lists the models in it)</span>.</p>
 
       <div class="fpanel case" role="figure" aria-label="Case file: the gate that failed open">
@@ -1309,20 +1317,20 @@
     <h2><span class="sn">06</span>Cite this work</h2>
     <div class="citebox">
       <button id="copy" type="button" class="copy">Copy</button>
-      <pre id="bib">@misc{liu2026agentabstain,
-  title  = {AgentAbstain: Do LLM Agents Know When Not to Act?},
-  author = {Liu, Xun and Zhang, Yi Evie and Kasprova, Vira and Rabbani, Parisa and Zahraei, Pardis Sadat and Zhang, Tianyu and Ebrahimpour-Boroojeny, Ali and Chandrasekaran, Varun},
-  year   = {2026},
-  eprint = {2607.10059},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.AI}
+      <pre id="bib">@inproceedings{liu2026agentabstain,
+  title     = {AgentAbstain: Do LLM Agents Know When Not to Act?},
+  author    = {Liu, Xun and Zhang, Yi Evie and Kasprova, Vira and Rabbani, Parisa and Zahraei, Pardis Sadat and Zhang, Tianyu and Ebrahimpour-Boroojeny, Ali and Chandrasekaran, Varun},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026},
+  note      = {Oral},
+  url       = {https://arxiv.org/abs/2607.10059}
 }</pre>
     </div>
   </section>
 
   <footer>
     <div class="fb"><img src="assets/logo-96.png" alt="" width="21" height="21">AgentAbstain</div>
-    <div class="fl">University of Illinois Urbana-Champaign · 2026</div>
+    <div class="fl">University of Illinois Urbana-Champaign · NeurIPS 2026 Oral</div>
     <div class="fr">
       <a href="https://arxiv.org/abs/2607.10059" target="_blank" rel="noopener">Paper</a>
       <a href="https://github.com/AntiQuality/agentabstain" target="_blank" rel="noopener">Code</a>
@@ -1459,13 +1467,15 @@
       var h = a.getAttribute('href');
       if (h && h.charAt(0)==='#' && h.length>1) links[h.slice(1)] = a;
     });
+    // #cases is nested inside #findings, so track every section in the band and light the last one
+    var inBand = {};
     var obs = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if (e.isIntersecting){
-          for (var k in links) links[k].classList.remove('active');
-          if (links[e.target.id]) links[e.target.id].classList.add('active');
-        }
-      });
+      es.forEach(function(e){ inBand[e.target.id] = e.isIntersecting; });
+      var cur = null;
+      for (var k in links) if (inBand[k]) cur = k;
+      if (!cur) return;
+      for (var j in links) links[j].classList.remove('active');
+      links[cur].classList.add('active');
     }, { rootMargin:'-45% 0px -50% 0px' });
     Object.keys(links).forEach(function(id){ var el=document.getElementById(id); if(el) obs.observe(el); });
   }
